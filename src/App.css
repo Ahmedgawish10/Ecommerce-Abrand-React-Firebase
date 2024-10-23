@@ -1,0 +1,27 @@
+@media screen and (max-width: 767px) {
+    .inactive-menu {
+        background-color: #24083e;
+        position: absolute;
+        top: 50px;
+        left: -100%;
+        width: 70%;
+        height: calc(100vh - 60px);
+        transition: .6s;
+
+    }
+    .active-menu{
+        display: block !important;
+        left:-16px;
+        transition: .8s;
+    }
+  
+
+
+
+
+}
+@media screen and (max-width: 450px) {
+    .header-links {
+        width: 100%;
+    }
+}
