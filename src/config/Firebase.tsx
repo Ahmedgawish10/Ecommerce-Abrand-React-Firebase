@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth,onAuthStateChanged,signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -17,3 +17,17 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+// check user is loggedin
+export const subscribeToAuthChanges = (setUser:any) => {
+  return onAuthStateChanged(auth, (user) => {
+      setUser(user);
+  });
+};
+// logout fun
+export const logout = async () => {
+  try {
+    await signOut(auth);
+  } catch (err) {
+    console.error(err);
+  }
+};

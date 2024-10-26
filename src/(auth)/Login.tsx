@@ -1,5 +1,5 @@
 import { auth ,db} from "../config/Firebase";
-import {createUserWithEmailAndPassword,signOut,updateProfile} from "firebase/auth";
+import {signInWithEmailAndPassword,signOut,updateProfile} from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,53 +7,40 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { useState } from "react";
 import FieldInput from "./FieldInput";
  
-export default function Auth() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
 
 
-  const Register = async (e:any) => {
+  const Login = async (e:any) => {
     e.preventDefault(); 
-    if (email === "" || password === "" || firstName === "" || lastName === "" || confirmPassword === "") {
+    if (email === "" || password === "") {
         toast.error("All fields are required");
         return;
       } 
-    if (password !== confirmPassword) {
-        toast.error("Password and confirmPassword do not match");
-        return;
-      }
+  
     try {
           setLoading(true)
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          await updateProfile(auth.currentUser!, {
-            displayName: `${firstName} ${lastName}`
-          });
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+         
 
-          await addDoc(collection(db, "users"), {
-            uid: userCredential.user.uid,
-            firstName,
-            lastName,
-            email,
-            password,
-            confirmPassword
-          });
-           navigate('/login', { replace: true });
+          toast.success("Login successfully.")
+          navigate('/', { replace: true });
 
           console.log("User registered:", userCredential.user.email);
 
       
     } catch (err) {
-      toast.error("Email is already in use."); 
+      toast.error("invalid-credential"); 
 
     } finally {
         setLoading(false); 
       }
   };
+
+
 
   return (
 <section className="">
@@ -82,7 +69,7 @@ export default function Auth() {
         </a>
 
         <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-          Welcome to Shein 🦑
+          Welcome to Shein 
         </h2>
 
         <p className="mt-4 leading-relaxed text-white/90">
@@ -116,7 +103,7 @@ export default function Auth() {
           </a>
 
           <h1 className="mt-2 text-2xl font-bold  sm:text-3xl md:text-4xl">
-          Welcome to Shein 🦑
+          Welcome to Shein 
           </h1>
 
           <p className="mt-4 leading-relaxed pb-6 ">
@@ -125,18 +112,7 @@ export default function Auth() {
           </p>
         </div>
 
-        <form action="#" className=" grid grid-cols-6 gap-6" onSubmit={Register}>
-
-          <div className="col-span-6 sm:col-span-3">
-          <FieldInput label="First Name" name="FirstName" type="text" value={firstName}
-           onChange={(e) => setFirstName(e.target.value)} placeholder="Enter your first name" />
-          </div>
-     
-          <div className="col-span-6 sm:col-span-3">
-           <FieldInput label="Last Name" name="LastName"  type="text"  value={lastName}
-           onChange={(e) => setLastName(e.target.value)}  placeholder="Enter your last name" />
-          </div>
-
+        <form action="#" className=" grid grid-cols-6 gap-6" onSubmit={Login}>
           <div className="col-span-6">
            <FieldInput label="Email" name="Email" type="email" value={email} 
            onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
@@ -147,42 +123,28 @@ export default function Auth() {
            onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
           </div>
 
-          <div className="col-span-6 sm:col-span-3">
-           <FieldInput label="Confirm Password" name="ConfirmPassword" type="password" value={confirmPassword}
-           onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm your password" />
-          </div>
-
-          <div className="col-span-6">
-            <p className="text-sm text-gray-500">
-              By creating an account, you agree to our
-              <a href="#" className="underline"> terms and conditions </a>
-              and
-              <a href="#" className=" underline">privacy policy</a>.
-            </p>
-          </div>
-
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button type="submit" disabled={loading}
               className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[150px]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
             >
-        {loading ? <div className="register-loader"></div>  :<div className="w-[100%]">Register</div>}
+        {loading ? <div className="register-loader"></div>  :<div className="w-[100%]">Login</div>}
       </button>
       <div className="provider flex gap-5 xs:flex-col xs:gap-0">
       <button type="button" className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
       <GoogleIcon className="me-2"/>
-Sign in with Google
+      Continue with Google
 </button>
       <button type="button" className="mt-3 xs:flex xs:justify-center text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
 <svg className="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
 <path fillRule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clipRule="evenodd"/>
 </svg>
-Sign in with Facebook
+Continue with Facebook
 </button>
       </div>
     
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-              Already have an account?
-              <Link to="/login" className="text-gray-700 underline">Log in</Link>.
+            Don't have an account?
+              <Link to="/register" className="text-gray-700 underline">Register</Link>.
             </p>
           </div>
         </form>

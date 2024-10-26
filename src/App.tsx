@@ -5,6 +5,7 @@ import Home from './components/Home';
 import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import Register from "./(auth)/Register"
+import Login from "./(auth)/Login";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -13,10 +14,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Register />,
+        element: <Home />,
       },
       {
-        path: "Test/:prefix",
+        path: "test/:prefix",
         element: <Home />,
         loader: ({ params }) => {
           if (
@@ -30,6 +31,13 @@ const router = createBrowserRouter([
           }
           return true;
         },
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      }, {
+        path: "/login",
+        element: <Login />,
       },
    
     ],
