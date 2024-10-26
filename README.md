@@ -24,4 +24,5 @@ React Testing Library: Focused on testing user interactions and component behavi
 1-Clone the repository<br>
 2-Navigate to the project directory<br>
 3-Install All dependencies<br>
-4-Run the application<br>
+4-Create file ENV for cofiguration firebase <br>
+5-Run the application<br>
