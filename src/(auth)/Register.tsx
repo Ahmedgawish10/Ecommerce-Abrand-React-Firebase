@@ -27,7 +27,8 @@ export default function Auth() {
         return;
       }
     try {
-      
+      setLoading(true)
+
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
         await updateProfile(auth.currentUser!, {
@@ -46,9 +47,10 @@ export default function Auth() {
 
       
     } catch (err) {
-      console.error(err);
+      toast.error("Email is already in use."); 
+
     } finally {
-        setLoading(false); // Set loading back to false after registration completes
+        setLoading(false); 
       }
   };
 
@@ -169,7 +171,7 @@ export default function Auth() {
               onChange={(e)=>setEmail(e.target.value)}
 
               name="email"
-              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm  shadow-sm"
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
@@ -182,7 +184,7 @@ export default function Auth() {
               onChange={(e)=>setPassword(e.target.value)}
 
               name="password"
-              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm  shadow-sm"
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
@@ -197,7 +199,7 @@ export default function Auth() {
               onChange={(e)=>setConfirmPassword(e.target.value)}
 
               name="password_confirmation"
-              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm  shadow-sm"
+              className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
             />
           </div>
 
@@ -212,11 +214,11 @@ export default function Auth() {
 
           <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button type="submit" disabled={loading}
-              className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+              className=" flex shrink-0 rounded-md border w-[150px]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
             >
-        {loading ? "Loading..." : "Register"}
+        {loading ? <div className="register-loader"></div>  :<div className="">Register</div>}
       </button>
-
+   
             <p className="mt-4 text-sm text-gray-500 sm:mt-0">
               Already have an account?
               <a href="#" className="text-gray-700 underline">Log in</a>.
@@ -229,3 +231,4 @@ export default function Auth() {
 </section>
   );
 };
+
