@@ -3,7 +3,7 @@ import { initFlowbite } from 'flowbite'
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useTheme   } from '@mui/material/styles';
-import { Typography } from '@mui/material';
+// import { Typography } from '@mui/material';
 function Header() {
 
     const theme = useTheme();
@@ -19,7 +19,7 @@ function Header() {
       setIsActive(!isActive);
     };
   return (
-    <header className='border-b-2 fixed top-[48px] w-[100%]'>
+    <header className='border-b-2 z-50 fixed top-[48px] w-[100%]'>
     <nav className={`${isDarkMode?"bg-[#ec8909]":"bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
         <div className="flex flex-wrap justify-between items-center container mx-auto relative">
             <a href="https://flowbite.com" className="flex items-center">

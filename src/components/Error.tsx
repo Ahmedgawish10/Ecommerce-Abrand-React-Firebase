@@ -6,12 +6,13 @@ const Error = () => {
   let errorStatusText: string;
 
   if (isRouteErrorResponse(error)) {
-    console.log("ff");
+    console.log(error);
 
     errorStatus = error.status;
     errorStatusText = error.statusText;
   } else {
     console.log("f");
+    console.log(error);
 
     errorStatus = 404;
     errorStatusText = "Page Not Found";
@@ -27,8 +28,8 @@ const Error = () => {
                 {errorStatus}
               </h1>
               <h1 className="text-6xl font-medium py-8 xs:text-3xl">
-                <div className="capitalize pb-2">oops!</div>Page{" "}
-                {errorStatusText}
+                <div className="capitalize pb-2">oops!</div>
+                   {errorStatus==404?"Page":""}         {errorStatusText}
               </h1>
               <button className="bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md mr-6 xs:mr-2">
                 <Link to="/" replace={true}>
