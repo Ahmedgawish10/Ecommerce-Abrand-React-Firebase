@@ -1,4 +1,4 @@
-import { auth ,db} from "../../config/Firebase";
+import { auth ,db} from "../config/Firebase";
 import {createUserWithEmailAndPassword,signOut,updateProfile} from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-hot-toast';

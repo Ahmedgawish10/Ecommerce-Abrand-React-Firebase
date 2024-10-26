@@ -4,7 +4,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from './components/Home';
 import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
-import Register from "./components/(auth)/Register"
+import Register from "./(auth)/Register"
 const router = createBrowserRouter([
   {
     path: "/",
