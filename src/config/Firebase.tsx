@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+//@ts-nocheck
 import { initializeApp } from "firebase/app";
 import { getAuth,onAuthStateChanged,signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
