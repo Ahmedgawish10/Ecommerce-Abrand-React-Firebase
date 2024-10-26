@@ -1,7 +1,6 @@
 # React + TypeScript + Vite( in Progress)
 
-E-commerce Application with TypeScript, Firebase, and React Testing Library 
-A dynamic eCommerce application developed with TypeScript, Firebase, and React, featuring user authentication, database management, and component testing.<br>
+This is an eCommerce application built with TypeScript, Firebase, and React. The project includes testing with React Testing Library to ensure component functionality and maintainability. Note: This is a work in progress, and additional features and refinements are actively being developed.<br>
 
 🚀 Features
 ---
