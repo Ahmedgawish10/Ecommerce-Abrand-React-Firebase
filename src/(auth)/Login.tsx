@@ -1,33 +1,49 @@
 import { auth ,db,subscribeToAuthChanges} from "../config/Firebase";
-import {signInWithEmailAndPassword,signOut,updateProfile} from "firebase/auth";
+import {signInWithEmailAndPassword} from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useEffect, useState } from "react";
+import {handleGoogleSignIn} from "../config/Firebase"
 import FieldInput from "./FieldInput";
  
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false); 
-    const [user, setUser] = useState("");
-
+    const [user, setUser] = useState({});
     const navigate = useNavigate();
     
-    useEffect(() => {
-           if (localStorage.getItem("authenticated")=="true") {
-             navigate('/', { replace: true });
-            toast.success("Already logged in");
-        }
-    },[])
+        useEffect(() => {
+            const unsubscribe = auth.onAuthStateChanged((firbaseUser: any) => {
+              setUser(firbaseUser);
+              setLoading(false);
+            });
+            if (user) {
+               navigate("/", { replace: true });
+                toast.success("Already logged in");
+              }
+            return () => unsubscribe(); 
+          }, [user]);
 
+            //wait to get auth and check if user authenticated or not()
+        if (Object.keys(user).length === 0) {  
+            return 
+        }
   const Login = async (e:any) => {
     e.preventDefault(); 
     if (email === "" || password === "") {
         toast.error("All fields are required");
         return;
       } 
+
+
+
+
+
+
+
   
     try {
           setLoading(true)
@@ -139,7 +155,7 @@ export default function Login() {
         {loading ? <div className="register-loader"></div>  :<div className="w-[100%]">Login</div>}
       </button>
       <div className="provider flex gap-5 xs:flex-col xs:gap-0">
-      <button type="button" className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
+      <button type="button" onClick={handleGoogleSignIn} className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
       <GoogleIcon className="me-2"/>
       Continue with Google
 </button>

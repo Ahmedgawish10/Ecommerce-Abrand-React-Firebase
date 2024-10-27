@@ -6,7 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
 import { useEffect, useState } from "react";
 import FieldInput from "./FieldInput";
- 
+import {handleGoogleSignIn} from "../config/Firebase"
+
 export default function Auth() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -173,7 +174,7 @@ export default function Auth() {
         {loading ? <div className="register-loader"></div>  :<div className="w-[100%]">Register</div>}
       </button>
       <div className="provider flex gap-5 xs:flex-col xs:gap-0">
-      <button type="button" className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
+      <button type="button" onClick={handleGoogleSignIn} className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
       <GoogleIcon className="me-2"/>
 Sign in with Google
 </button>

@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth,onAuthStateChanged,signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,6 +18,20 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+
+
+
+// Sign In with Google 
+export const handleGoogleSignIn = async () => {
+  const provider = new GoogleAuthProvider();
+  try {
+    const result = await signInWithPopup(auth, provider);
+    console.log("User info:", result.user); // User info available in result.user
+    // Redirect or update state as needed after successful login
+  } catch (err) {
+    console.error("Error during Google sign-in:", err);
+  }
+};
 // check user is loggedin
 export const subscribeToAuthChanges = (setUser:any) => {
   return onAuthStateChanged(auth, (user) => {
