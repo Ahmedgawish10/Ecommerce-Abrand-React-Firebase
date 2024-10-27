@@ -6,6 +6,8 @@ import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import Register from "./(auth)/Register"
 import Login from "./(auth)/Login";
+import Users from './components/Users';
+import ProtectedRoute from './(auth)/ProtectedRoute';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "test/:prefix",
-        element: <Home />,
+        element:<ProtectedRoute><Users /></ProtectedRoute> ,
         loader: ({ params }) => {
           if (
             typeof params.prefix !== "string" ||

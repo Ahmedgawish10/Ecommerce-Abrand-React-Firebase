@@ -14,11 +14,10 @@ export default function Login() {
     const [user, setUser] = useState("");
 
     const navigate = useNavigate();
-    console.log(auth.currentUser);
     
     useEffect(() => {
            if (localStorage.getItem("authenticated")=="true") {
-            navigate('/', { replace: true });
+             navigate('/', { replace: true });
             toast.success("Already logged in");
         }
     },[])

@@ -15,38 +15,32 @@ import {  useNavigate } from 'react-router-dom';
 // import { Typography } from '@mui/material';
 function Header() {
     const navigate = useNavigate();
-
-    const [isActive, setIsActive] = useState(false);
-    const [user, setUser] = useState("");
-    const [route, setRoute] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [user, setUser] = useState(null);
     const [profile, setProfile] = useState(false);
-
-    const location = useLocation(); 
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === 'dark';
-     console.log(auth.currentUser);
+        
+ useEffect(() => {
+    initFlowbite();
 
-    useEffect(() => {
-        initFlowbite();
-                if (location.pathname === "/register" || location.pathname === "/login") {                    
-                    setRoute(false);
-                }else{ 
-                //    fire this if we not login or register page
-                    setRoute(true)                    
-                }
-        // check user logged or not
-        const unsubscribe = subscribeToAuthChanges(setUser);
-        return () => unsubscribe(); // Cleanup the subscription
-    }, [location])
+    const unsubscribe = auth.onAuthStateChanged((firbaseUser: any) => {
+      setUser(firbaseUser);
+      setLoading(false);
+    });
 
-
+    return () => unsubscribe(); // Clean up the subscription on unmount
+  }, []);
 
     const toggleMenu = () => {
-        setIsActive(!isActive);
+        setIsMenuOpen(!isMenuOpen);
     };
     const toggleProfile = () => {
         setProfile(!profile);
     };
+     
+         
     return (
         <header className='main-header border-b-2 z-50 fixed top-[48px] w-[100%]'>
             <nav className={`${isDarkMode ? "bg-[#ec8909]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
@@ -57,10 +51,10 @@ function Header() {
                     </a>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
-                ${isActive ? 'active-menu' : ''}`} id="mobile-menu-2">
+                ${isMenuOpen ? 'active-menu' : ''}`} id="mobile-menu-2">
                         <ul className="flex flex-col md:flex-row   font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
-                                <a href="#" className="block py-2 pr-4 pl-3  lg:p-0 " aria-current="page">Home</a>
+                                <a href="#" className="block py-2 pr-4 pl-3  lg:p-0 " aria-current="page">Home </a>
                             </li>
                             <li>
                                 <a href="#" className="block py-2 md:pr-3 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  lg:p-0">Company</a>
@@ -78,7 +72,7 @@ function Header() {
                     </div>
 
                     <div className="flex items-center lg:order-2">
-                        {auth.currentUser && route?
+                        {user ?
                             <>
                             <div className="cart flex gap-1 mr-2">
                                 <SearchIcon className="cursor-pointer"/>
@@ -93,9 +87,9 @@ function Header() {
                                     <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
                                     <div className="text-green-700 font-bold flex items-center gap-2">
                                    <span className=" w-3.5 h-3.5 bg-green-400 border-2 dark:border-gray-800 rounded-full"></span>
-                                           <span>{auth.currentUser.displayName}</span>  
+                                           <span>{auth?.currentUser?.displayName}</span>  
                                         </div>
-                                        <div className="font-medium truncate">{auth.currentUser.email}</div>
+                                        <div className="font-medium truncate">{auth?.currentUser?.email}</div>
                                     </div>
                                     <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
                                         <li>
@@ -112,14 +106,15 @@ function Header() {
                             </>
 
                             :
-                            <><Link to="/register" className="button-64 mr-2 xs:!hidden"><span className="text ">Register </span></Link>
+                            (loading?"":  <><Link to="/register" className="button-64 mr-2 xs:!hidden"><span className="text ">Register </span></Link>
                                 <Link to="/login" className="button-64"><span className="text">Login </span> </Link>
-                            </>}
+                            </>)
+                          }
 
 
 
                         <button onClick={toggleMenu} data-collapse-toggle="mobile-menu-2" type="button" className=" ml-3 md:hidden   md:bg-green-200 items-center  text-sm text-gray-500  lg:hidden  focus:outline-none  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
-                            {isActive ? <CloseIcon className="!text-4xl" /> : <MenuIcon className="!text-4xl" />}
+                            {isMenuOpen ? <CloseIcon className="!text-4xl" /> : <MenuIcon className="!text-4xl" />}
                         </button>
                     </div>
 
