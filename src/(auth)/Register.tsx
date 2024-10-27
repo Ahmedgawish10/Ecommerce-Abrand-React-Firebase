@@ -4,7 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FieldInput from "./FieldInput";
  
 export default function Auth() {
@@ -15,7 +15,12 @@ export default function Auth() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false); 
     const navigate = useNavigate();
-
+    useEffect(() => {
+      if (localStorage.getItem("authenticated")=="true") {
+       navigate('/', { replace: true });
+       toast.success("Already logged in");
+   }
+},[])
 
   const Register = async (e:any) => {
     e.preventDefault(); 

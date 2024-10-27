@@ -7,8 +7,11 @@ import './index.css'
 import MainLayout from './layout/MainLayout.tsx'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  <>
+    {/* <StrictMode> */}
   <Toaster position="top-right"/>
     <App />
-  </StrictMode>,
+  {/* </StrictMode> */}
+  </>
+
 )

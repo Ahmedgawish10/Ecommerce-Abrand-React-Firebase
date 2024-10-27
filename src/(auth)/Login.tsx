@@ -1,18 +1,27 @@
-import { auth ,db} from "../config/Firebase";
+import { auth ,db,subscribeToAuthChanges} from "../config/Firebase";
 import {signInWithEmailAndPassword,signOut,updateProfile} from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FieldInput from "./FieldInput";
  
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false); 
-    const navigate = useNavigate();
+    const [user, setUser] = useState("");
 
+    const navigate = useNavigate();
+    console.log(auth.currentUser);
+    
+    useEffect(() => {
+           if (localStorage.getItem("authenticated")=="true") {
+            navigate('/', { replace: true });
+            toast.success("Already logged in");
+        }
+    },[])
 
   const Login = async (e:any) => {
     e.preventDefault(); 
@@ -27,6 +36,7 @@ export default function Login() {
          
 
           toast.success("Login successfully.")
+          localStorage.setItem("authenticated","true");
           navigate('/', { replace: true });
 
           console.log("User registered:", userCredential.user.email);

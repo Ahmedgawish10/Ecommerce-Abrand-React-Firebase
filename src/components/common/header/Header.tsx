@@ -7,9 +7,15 @@ import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 import {logout} from "../../../config/Firebase"
 import { useLocation } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import SearchIcon from '@mui/icons-material/Search';
+import {  useNavigate } from 'react-router-dom';
 
 // import { Typography } from '@mui/material';
 function Header() {
+    const navigate = useNavigate();
+
     const [isActive, setIsActive] = useState(false);
     const [user, setUser] = useState("");
     const [route, setRoute] = useState(false);
@@ -18,16 +24,15 @@ function Header() {
     const location = useLocation(); 
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === 'dark';
-    // console.log(auth.currentUser);
+     console.log(auth.currentUser);
 
     useEffect(() => {
         initFlowbite();
                 if (location.pathname === "/register" || location.pathname === "/login") {                    
-                    setRoute(false)
+                    setRoute(false);
                 }else{ 
                 //    fire this if we not login or register page
-                    setRoute(true)
-
+                    setRoute(true)                    
                 }
         // check user logged or not
         const unsubscribe = subscribeToAuthChanges(setUser);
@@ -75,6 +80,12 @@ function Header() {
                     <div className="flex items-center lg:order-2">
                         {auth.currentUser && route?
                             <>
+                            <div className="cart flex gap-1 mr-2">
+                                <SearchIcon className="cursor-pointer"/>
+                                <FavoriteBorderIcon className="cursor-pointer"/>
+                                <ShoppingCartIcon className="cursor-pointer"/>
+
+                            </div>
                                 <div className="relative cursor-pointer w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600" id="avatarButton" onClick={toggleProfile}>
                                     <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
                                 </div>

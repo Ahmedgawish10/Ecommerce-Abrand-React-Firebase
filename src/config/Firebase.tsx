@@ -1,5 +1,4 @@
 // Import the functions you need from the SDKs you need
-//@ts-nocheck
 import { initializeApp } from "firebase/app";
 import { getAuth,onAuthStateChanged,signOut } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
@@ -28,6 +27,9 @@ export const subscribeToAuthChanges = (setUser:any) => {
 export const logout = async () => {
   try {
     await signOut(auth);
+    if (localStorage.getItem("authenticated")=="true") {
+      localStorage.removeItem("authenticated")
+  }
   } catch (err) {
     console.error(err);
   }
