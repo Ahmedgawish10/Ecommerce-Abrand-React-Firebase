@@ -26,6 +26,8 @@ export const handleGoogleSignIn = async () => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
+    localStorage.setItem("isAuthenticated", "true");
+
     console.log("User info:", result.user); // User info available in result.user
     // Redirect or update state as needed after successful login
   } catch (err) {
@@ -42,8 +44,8 @@ export const subscribeToAuthChanges = (setUser:any) => {
 export const logout = async () => {
   try {
     await signOut(auth);
-    if (localStorage.getItem("authenticated")=="true") {
-      localStorage.removeItem("authenticated")
+    if (localStorage.getItem("isAuthenticated")=="true") {      
+      localStorage.removeItem("isAuthenticated")
   }
   } catch (err) {
     console.error(err);

@@ -21,7 +21,9 @@ export default function Auth() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [loading, setLoading] = useState(false); 
+    const [registerSpiner, setRegisterSpiner] = useState(false); 
+    const [loading, setLoading] = useState(true);
+
     const [userAuth, setUserAuth] = useState(null);
     const [userData, setUserData] = useState<any>([]);
     const [isAuth, setIsAuth] = useState(false);
@@ -31,7 +33,8 @@ export default function Auth() {
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged((firbaseUser: any) => {
           setUserAuth(firbaseUser);
-          setLoading(false);
+          setRegisterSpiner(false);
+          setLoading(false)
       });
       return () => unsubscribe();
   }, [userAuth]);
@@ -48,14 +51,13 @@ export default function Auth() {
         return;
       }
     try {
-          setLoading(true)
+          setRegisterSpiner(true)
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           await updateProfile(auth.currentUser!, {
             displayName: `${firstName} ${lastName}`
           });
-
           await addDoc(collection(db, "users"), {
-            uid: userCredential.user.uid,
+           uid: userCredential.user.uid,
             firstName,
             lastName,
             email,
@@ -64,65 +66,19 @@ export default function Auth() {
             auth22:"no"
           });
            navigate('/login', { replace: true });
-
           console.log("User registered:", userCredential.user.email);
-
-      
     } catch (err) {
       toast.error("Email is already in use."); 
 
     } finally {
-        setLoading(false); 
+        setRegisterSpiner(false); 
       }
   };
-  
-  
-
-// get user is logged in now
- const getCurrentUser = async () => {
-   if (!auth.currentUser) {
-     return; // Return early if user is not authenticated
-   }
-   try {
-     // Create a reference to the 'users' collection
-     const usersCollectionRef = collection(db, 'users');
-     // Set up a query with the filter condition
-     const q = query(usersCollectionRef, where('uid', '==', auth?.currentUser?.uid));
-     // Fetch the filtered documents
-     const querySnapshot = await getDocs(q);
-     // Map through the documents and format the data
-     const users = querySnapshot.docs.map((doc) => {
-      let FirbaseUser= doc.data()
-      setUserData(FirbaseUser);
-      console.log(FirbaseUser);
-      
-      setIsAuth(true);
-
-   });
-   } catch (err) {
-     console.error('Error fetching filtered users:', err);
-   }
- };
- useEffect(() => {
-  getCurrentUser();
- }, [auth.currentUser?.uid]);
-
-
-if(!isAuth && auth.currentUser){
-if (userData?.auth=="authenticated") {
-  toast.success("Already loggehd in");
-   navigate('/', { replace: true });
-
-}
-return
-}
-
   return (
 
 <> 
-{(userData?.auth=="authenticated"&& isAuth)? <Navigate replace to="/" />:
-(
-<section className="">
+{ auth.currentUser && localStorage.getItem("isAuthenticated")? <Navigate replace to="/" />:
+loading?"...":<section className="">
 <div className="lg:grid lg:min-h-creen lg:grid-cols-12">
   <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
     <img
@@ -228,10 +184,10 @@ return
         </div>
 
         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-          <button type="submit" disabled={loading}
+          <button type="submit" disabled={registerSpiner}
             className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[150px]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
           >
-      {loading ? <div className="register-loader"></div>  :<div className="w-[100%]">Register</div>}
+      {registerSpiner ? <div className="register-loader"></div>  :<div className="w-[100%]">Register</div>}
     </button>
     <div className="provider flex gap-5 xs:flex-col xs:gap-0">
     <button type="button" onClick={handleGoogleSignIn} className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
@@ -256,9 +212,10 @@ Sign in with Facebook
   </main>
 </div>
 </section>
+
     
 
-)}
+}
 </>
 
    

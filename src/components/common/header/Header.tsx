@@ -73,7 +73,7 @@ function Header() {
                     </div>
 
                     <div className="flex items-center lg:order-2">
-                        {userAuth && localStorage.getItem("authenticated")=="true" ?
+                        {(auth.currentUser &&  localStorage.getItem("isAuthenticated")=="true")  ?
                             <>
                             <div className="cart flex gap-1 mr-2">
                                 <SearchIcon className="cursor-pointer"/>
@@ -105,7 +105,6 @@ function Header() {
                                     </div>
                                 </div></>}
                             </>
-
                             :
                             (loading?"":  <><Link to="/register" className="button-64 mr-2 xs:!hidden"><span className="text ">Register </span></Link>
                                 <Link to="/login" className="button-64"><span className="text">Login </span> </Link>
