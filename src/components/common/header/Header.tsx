@@ -1,32 +1,30 @@
-import { auth, subscribeToAuthChanges } from "../../../config/Firebase";
+import { auth, subscribeToAuthChanges ,logout} from "../../../config/Firebase";
 import { useEffect, useState } from 'react'
+import { useTheme } from '@mui/material/styles';
+import { Link,useNavigate } from 'react-router-dom';
 import { initFlowbite } from 'flowbite'
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
-import {logout} from "../../../config/Firebase"
-import { useLocation } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
-import {  useNavigate } from 'react-router-dom';
 
 // import { Typography } from '@mui/material';
 function Header() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [user, setUser] = useState(null);
+    const [userAuth, setUserAuth] = useState(null);
     const [profile, setProfile] = useState(false);
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === 'dark';
+        // console.log(auth.currentUser);
         
  useEffect(() => {
     initFlowbite();
 
     const unsubscribe = auth.onAuthStateChanged((firbaseUser: any) => {
-      setUser(firbaseUser);
+        setUserAuth(firbaseUser);
       setLoading(false);
     });
 
@@ -35,13 +33,16 @@ function Header() {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+        setProfile(false)
     };
     const toggleProfile = () => {
         setProfile(!profile);
+        setIsMenuOpen(false)
     };
      
          
     return (
+        
         <header className='main-header border-b-2 z-50 fixed top-[48px] w-[100%]'>
             <nav className={`${isDarkMode ? "bg-[#ec8909]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
@@ -72,7 +73,7 @@ function Header() {
                     </div>
 
                     <div className="flex items-center lg:order-2">
-                        {user ?
+                        {userAuth && localStorage.getItem("authenticated")=="true" ?
                             <>
                             <div className="cart flex gap-1 mr-2">
                                 <SearchIcon className="cursor-pointer"/>
