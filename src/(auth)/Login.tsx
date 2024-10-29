@@ -45,9 +45,9 @@ export default function Login() {
             setLoading(false);
 
         });
-        if (userAuth && localStorage.getItem("isAuthenticated")=="true") {
+        if (userAuth && localStorage.getItem("isAuthenticated")=="true" && !auth?.currentUser?.photoURL ) {
              navigate("/", { replace: true });
-            // setLoading(false)
+                // setLoading(false)
              toast.success("You Already logged in");
         }
         // getMovieList()
