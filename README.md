@@ -1,4 +1,4 @@
-# React + TypeScript + Vite( in Progress)
+# React + TypeScript + Firebase + Jest for Unit Testing + Vite( in Progress)
 
 This is an eCommerce application built with TypeScript, Firebase, and React. The project includes testing with React Testing Library to ensure component functionality and maintainability. Note: This is a work in progress, and additional features and refinements are actively being developed.<br>
 
