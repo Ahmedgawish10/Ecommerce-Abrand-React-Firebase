@@ -1,13 +1,13 @@
 import './App.css'
 
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Home from './components/Home';
 import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import Register from "./(auth)/Register"
 import Login from "./(auth)/Login";
 import Users from './components/Users';
 import ProtectedRoute from './(auth)/ProtectedRoute';
+import Home from './components/Home';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Home/>,
       },
       {
         path: "test/:prefix",

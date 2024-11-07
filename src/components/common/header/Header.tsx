@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
-
+import PersonIcon from '@mui/icons-material/Person';
 // import { Typography } from '@mui/material';
 function Header() {
     const navigate = useNavigate();
@@ -47,8 +47,8 @@ function Header() {
             <nav className={`${isDarkMode ? "bg-[#ec8909]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
                     <a href="https://flowbite.com" className="flex items-center">
-                        <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                        <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Shein </span>
+                        <img src="https://flowbite.com/docs/images/logo.svg" className="mr-2 h-6 sm:h-9" alt="Flowbite Logo" />
+                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white">ABrand</span>
                     </a>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
@@ -107,7 +107,7 @@ function Header() {
                             </>
                             :
                             (loading?"":  <><Link to="/register" className="button-64 mr-2 xs:!hidden"><span className="text ">Register </span></Link>
-                                <Link to="/login" className="button-64"><span className="text">Login </span> </Link>
+                                <Link to="/login" className="button-64"><span className="text flex gap-2 items-center !py-1.5 "> <PersonIcon/>  Login </span> </Link>
                             </>)
                           }
 

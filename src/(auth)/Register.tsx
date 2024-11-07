@@ -1,6 +1,6 @@
 import { auth ,db} from "../config/Firebase";
 import {createUserWithEmailAndPassword,signOut,updateProfile} from "firebase/auth";
-import { collection, addDoc, getDocs, doc, updateDoc, getDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, updateDoc, getDoc, query, where, serverTimestamp } from "firebase/firestore";
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate,Navigate } from 'react-router-dom';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -16,8 +16,7 @@ export default function Auth() {
     uid?: string; // Include any other fields you expect
     auth?: string; // Optional if you want to add this property later
   }
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -42,7 +41,7 @@ export default function Auth() {
 
   const Register = async (e:any) => {
     e.preventDefault(); 
-    if (email === "" || password === "" || firstName === "" || lastName === "" || confirmPassword === "") {
+    if (email === "" || password === "" || userName === "" || confirmPassword === "") {
         toast.error("All fields are required");
         return;
       } 
@@ -54,16 +53,16 @@ export default function Auth() {
           setRegisterSpiner(true)
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           await updateProfile(auth.currentUser!, {
-            displayName: `${firstName} ${lastName}`
+            displayName: `${userName} `
           });
           await addDoc(collection(db, "users"), {
            uid: userCredential.user.uid,
-            firstName,
-            lastName,
+           userName,
             email,
             password,
             confirmPassword,
-            auth22:"no"
+            auth22:"no",
+            timeStamp:serverTimestamp()
           });
            navigate('/login', { replace: true });
           console.log("User registered:", userCredential.user.email);
@@ -80,7 +79,7 @@ export default function Auth() {
 { auth.currentUser && localStorage.getItem("isAuthenticated")? <Navigate replace to="/" />:
 loading?"...":<section className="">
 <div className="lg:grid lg:min-h-creen lg:grid-cols-12">
-  <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+  <section className=" hidden relative lg:flex items-end bg-gray-900 lg:col-span-5 h-[calc(100vh-112px)] xl:col-span-6">
     <img
       alt=""
       src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
@@ -103,7 +102,7 @@ loading?"...":<section className="">
       </a>
 
       <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-        Welcome to Shein 🦑
+        Welcome to ABrand 
       </h2>
 
       <p className="mt-4 leading-relaxed text-white/90">
@@ -113,11 +112,10 @@ loading?"...":<section className="">
     </div>
   </section>
 
-  <main
-    className="flex items-center justify-center px-8 py-8 md:py-0 sm:px-12 lg:col-span-7 lg:px-16 lg:py-0 xl:col-span-6"
+  <main className="flex items-center justify-center px-8 py-8 md:py-0 sm:px-12 lg:col-span-7 lg:px-16 lg:py-0 xl:col-span-6"
   >
     <div className="max-w-xl lg:max-w-3xl">
-      <div className="relative -mt-16 block lg:hidden">
+      <div className="hidden relative  lg:hidden ">
         <a
           className="inline-flex size-16 items-center justify-center rounded-full bg-white text-blue-600 sm:size-20"
           href="#"
@@ -138,7 +136,7 @@ loading?"...":<section className="">
         </a>
 
         <h1 className="mt-2 text-2xl font-bold  sm:text-3xl md:text-4xl">
-        Welcome to Shein 🦑
+        Welcome to Shein 
         </h1>
 
         <p className="mt-4 leading-relaxed pb-6 ">
@@ -149,14 +147,9 @@ loading?"...":<section className="">
 
       <form action="#" className=" grid grid-cols-6 gap-6" onSubmit={Register}>
 
-        <div className="col-span-6 sm:col-span-3">
-        <FieldInput label="First Name" name="FirstName" type="text" value={firstName}
-         onChange={(e) => setFirstName(e.target.value)} placeholder="Enter your first name" />
-        </div>
-   
-        <div className="col-span-6 sm:col-span-3">
-         <FieldInput label="Last Name" name="LastName"  type="text"  value={lastName}
-         onChange={(e) => setLastName(e.target.value)}  placeholder="Enter your last name" />
+        <div className="col-span-6 sm:col-span-3 md:mt-6">
+        <FieldInput label="User Name" name="FirstName" type="text" value={userName}
+         onChange={(e) => setUserName(e.target.value)} placeholder="Enter your name" />
         </div>
 
         <div className="col-span-6">
@@ -174,24 +167,15 @@ loading?"...":<section className="">
          onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm your password" />
         </div>
 
-        <div className="col-span-6">
-          <p className="text-sm text-gray-500">
-            By creating an account, you agree to our
-            <a href="#" className="underline"> terms and conditions </a>
-            and
-            <a href="#" className=" underline">privacy policy</a>.
-          </p>
-        </div>
-
         <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
           <button type="submit" disabled={registerSpiner}
             className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[150px]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
           >
       {registerSpiner ? <div className="register-loader"></div>  :<div className="w-[100%]">Register</div>}
     </button>
-    <div className="provider flex gap-5 xs:flex-col xs:gap-0">
+    <div className="provider flex gap-4 xs:flex-col xs:gap-0 mt-2">
     <button type="button" onClick={handleGoogleSignIn} className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
-    <GoogleIcon className="me-2"/>
+    <GoogleIcon className="me-2 !text-xl"/>
 Sign in with Google
 </button>
     <button type="button" className="mt-3 xs:flex xs:justify-center text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
@@ -202,9 +186,10 @@ Sign in with Facebook
 </button>
     </div>
   
-          <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-            Already have an account?
-            <Link to="/login" className="text-gray-700 underline">Log in</Link>.
+            <p className="mt-4 text-sm  sm:mt-0">
+                      <Link to="/login" className="block text-center mt-4 text-blue-600">
+                      Already have an account? Login
+                      </Link>
           </p>
         </div>
       </form>
