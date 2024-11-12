@@ -5,7 +5,7 @@ import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import Register from "./(auth)/Register"
 import Login from "./(auth)/Login";
-import Users from './components/Users';
+import Users from './components/Products';
 import ProtectedRoute from './(auth)/ProtectedRoute';
 import Home from './components/Home';
 const router = createBrowserRouter([

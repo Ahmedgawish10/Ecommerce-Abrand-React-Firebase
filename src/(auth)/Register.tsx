@@ -22,10 +22,7 @@ export default function Auth() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [registerSpiner, setRegisterSpiner] = useState(false); 
     const [loading, setLoading] = useState(true);
-
     const [userAuth, setUserAuth] = useState(null);
-    const [userData, setUserData] = useState<any>([]);
-    const [isAuth, setIsAuth] = useState(false);
 
     const navigate = useNavigate();
 
@@ -38,6 +35,7 @@ export default function Auth() {
       return () => unsubscribe();
   }, [userAuth]);
 
+  if (loading) {   return   }
 
   const Register = async (e:any) => {
     e.preventDefault(); 
@@ -75,9 +73,9 @@ export default function Auth() {
   };
   return (
 
-<> 
-{ auth.currentUser && localStorage.getItem("isAuthenticated")? <Navigate replace to="/" />:
-loading?"...":<section className="">
+<div className="register-section"> 
+{
+auth.currentUser && localStorage.getItem("isAuthenticated")? <Navigate replace to="/" />:<section className="">
 <div className="lg:grid lg:min-h-creen lg:grid-cols-12">
   <section className=" hidden relative lg:flex items-end bg-gray-900 lg:col-span-5 h-[calc(100vh-112px)] xl:col-span-6">
     <img
@@ -197,15 +195,8 @@ Sign in with Facebook
   </main>
 </div>
 </section>
-
-    
-
 }
-</>
-
-   
-
-
-  );
+</div>
+ );
 };
 

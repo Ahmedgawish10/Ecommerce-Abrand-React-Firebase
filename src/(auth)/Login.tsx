@@ -13,31 +13,11 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [loginSpiner, setLoginSpiner] = useState(false);
     const [loading, setLoading] = useState(true);
-
     const [userAuth, setUserAuth] = useState(null);
     const [data, setData] = useState([{}]);
     const [Auth, setAuth] = useState(null);
-
     const navigate = useNavigate();
-    // const moviesCollectionRef = collection(db, "users");
-// console.log(auth.currentUser?.uid);
 
-    // const getMovieList = async () => {
-
-    //     try {
-    //       const datar = await getDocs(moviesCollectionRef);
-    //       const filteredData = datar.docs.map((doc) => ({
-    //         ...doc.data(),
-    //         id: doc.id,
-    //       }));
-    //       setData(filteredData)
-    //       console.log(filteredData);
-    //     } catch (err) {
-    //       console.error(err);
-    //     }
-    // }  
-    //  console.log(data?.map((obj:any,i)=>console.log(obj?.id)))
-    
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((firbaseUser: any) => {
             setUserAuth(firbaseUser);
@@ -46,17 +26,15 @@ export default function Login() {
         });
         if (userAuth && localStorage.getItem("isAuthenticated")=="true" && !auth?.currentUser?.photoURL ) {
              navigate("/", { replace: true });
-                // setLoading(false)
-             toast.success("You Already logged in");
+            setLoading(false)
+             toast.success("You Already Logged in");
         }
         // getMovieList()
       
         return () => unsubscribe();
-    }, [userAuth]);
-    const updateMovieTitle = async (id:any) => {
-        const movieDoc = doc(db, "users", );
-        await updateDoc(movieDoc, { auth: "yes" });
-      };
+    }, [userAuth])
+    if (loading) {   return   }
+
     const Login = async (e: any) => {        
         e.preventDefault();
         if (email === "" || password === "") {
@@ -77,8 +55,8 @@ export default function Login() {
         }
     };
     return (
-        <>  
-       {auth.currentUser && localStorage.getItem("isAuthenticated") ?<Navigate replace to="/" />:loading?"...":<> <section className="">
+        <div className="login-section">  
+       {auth.currentUser && localStorage.getItem("isAuthenticated") ?<Navigate replace to="/" />:<section className="">
                 <div className="lg:grid lg:grid-cols-12 lg:h-[calc(100vh-112px)]">
                 <section className=" hidden relative lg:flex  items-end bg-gray-900 lg:col-span-5    xl:col-span-6 ">
     <img
@@ -184,11 +162,8 @@ export default function Login() {
                         </div>
                     </main>
                 </div>
-            </section></>}
-
-            </>
-     
-      
+            </section>}
+         </div>
     );
 };
 
