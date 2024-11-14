@@ -43,7 +43,7 @@ const ProductList = () => {
                   <img
                     onLoad={() => console.log("img-load")}
                     className="p-4 rounded-t-lg w-[100%] h-[300px]"
-                    src={product.image}
+                    src={product?.imageUrl}
                     alt="product image"
                   />
                 </a>

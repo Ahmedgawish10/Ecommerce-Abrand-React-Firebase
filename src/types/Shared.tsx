@@ -2,7 +2,8 @@ export  interface Product {
   id?: string;
   name?: string;
   price?: number;
-  image?:string;
+  imageUrl?:string;
   category?:string;
   quantity?: number; 
+  timeStamp?:string
 }
