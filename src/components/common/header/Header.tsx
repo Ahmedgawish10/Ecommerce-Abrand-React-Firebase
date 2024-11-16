@@ -47,8 +47,8 @@ function Header() {
             <nav className={`${isDarkMode ? "bg-[#030302]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
                     <a href="https://flowbite.com" className="flex items-center">
-                        <img src="https://flowbite.com/docs/images/logo.svg" className="mr-2 h-6 sm:h-9" alt="Flowbite Logo" />
-                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white">ABrand</span>
+                       
+                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white uppercase">ABRAND.CO</span>
                     </a>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
