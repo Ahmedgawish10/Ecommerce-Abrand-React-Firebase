@@ -55,7 +55,7 @@ function Header() {
                 ${isMenuOpen ? 'active-menu' : ''}`} id="mobile-menu-2">
                         <ul className="flex flex-col md:flex-row   font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
-                                <a href="#" className="block py-2 pr-4 pl-3  lg:p-0  font-bold" aria-current="page">Home </a>
+                                <a href="/" className="block py-2 pr-4 pl-3  lg:p-0  font-bold" aria-current="page">Home </a>
                             </li>
                             <li>
                                 <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  font-bold lg:p-0">Shop</a>

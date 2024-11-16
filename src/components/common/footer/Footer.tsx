@@ -17,7 +17,7 @@ function Footer() {
      <section className="pt-16 pb-7 bg-gray-900 ">
     <div className="  px-4 sm:px-6 lg:px-8 container mx-auto">
       <div className="flex flex-col sm:flex-row items-center justify-between pb-14 border-b border-gray-500 gap-8">
-        <a href="#" className=" uppercase font-extrabold">
+        <a href="#" className=" uppercase font-extrabold text-white">
           ABrand.co
          
         </a>
