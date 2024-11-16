@@ -56,7 +56,7 @@ console.log(data);
     <div className='h-[100vh] ' >
 
     {data.length === 0 ? (
-      <div className='text-center pt-[80px]'> category data empty</div> 
+      <div className='text-center pt-[80px]'> category data empty.</div> 
     ) : (
       <ul>
         {data.map((phone: any) => (
