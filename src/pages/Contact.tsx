@@ -21,14 +21,14 @@ function ContactForm() {
               <div className="mb-3 w-full">
                 <label
                   className="block font-medium mb-[2px] "
-                  htmlFor="exampleInput90"
+                  htmlFor="name"
                 >
                   Name
                 </label>
                 <input
                   type="text"
                   className="px-2 py-2 border w-full outline-none rounded-md"
-                  id="exampleInput90"
+                  id="name"
                   placeholder="Name"
                 />
               </div>
@@ -36,14 +36,14 @@ function ContactForm() {
               <div className="mb-3 w-full">
                 <label
                   className="block font-medium mb-[2px] "
-                  htmlFor="exampleInput90"
+                  htmlFor="email"
                 >
                   Email
                 </label>
                 <input
                   type="email"
+                  id="email"
                   className="px-2 py-2 border w-full outline-none rounded-md"
-                  id="exampleInput90"
                   placeholder="Enter your email address"
                 />
               </div>
@@ -51,14 +51,14 @@ function ContactForm() {
               <div className="mb-3 w-full">
                 <label
                   className="block font-medium mb-[2px] "
-                  htmlFor="exampleInput90"
+                  htmlFor="msg"
                 >
                   Message
                 </label>
                 <textarea
                   className="px-2 py-2 border rounded-[5px] w-full outline-none"
                   name=""
-                  id=""
+                  id="msg"
                 ></textarea>
               </div>
 
