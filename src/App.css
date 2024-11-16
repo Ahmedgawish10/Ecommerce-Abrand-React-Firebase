@@ -20,4 +20,7 @@
     .header-links {
         width: 100%;
     }
+    .container-carousel{
+        height: 100vh !important;
+    }
 }

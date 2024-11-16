@@ -5,6 +5,7 @@ import Footer from "../components/common/footer/Footer";
 function MainLayout() {
   return (
       <ThemeProviderMode>
+        <div className="App">
         <Header />
         <main>
           <div className="MainLayout mt-[110px]">
@@ -12,6 +13,7 @@ function MainLayout() {
           </div>
         </main>
         <Footer/>
+        </div>
       </ThemeProviderMode>
   );
 }

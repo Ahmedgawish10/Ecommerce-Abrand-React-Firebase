@@ -9,6 +9,7 @@ import Users from './pages/Products';
 import ProtectedRoute from './(auth)/ProtectedRoute';
 import Home from './components/Home';
 import Contact from './pages/Contact';
+import SingleCategory from './components/common/category/SingleCategory';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,13 +21,14 @@ const router = createBrowserRouter([
         element: <Home/>,
       },
       {
-        path: "test/:prefix",
-        element:<ProtectedRoute><Users /></ProtectedRoute> ,
-        loader: ({ params }) => {
-          if (
-            typeof params.prefix !== "string" ||
-            !/^[a-z]+$/i.test(params.prefix)
-          ) {
+        path: "categories",
+        element:<ProtectedRoute><SingleCategory /></ProtectedRoute> ,
+        loader: ({ request,params }) => {
+          const url = new URL(request.url); 
+          console.log(params);
+          
+          const category = url.searchParams.get('category');
+          if (!isNaN(Number(category))) {
             throw new Response("Bad Request", {
               statusText: "Category not found",
               status: 400,
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
           }
           return true;
         },
+      },
+      {
+        path: "/catgory",
+        element: <Contact />,
       },
       {
         path: "/register",
