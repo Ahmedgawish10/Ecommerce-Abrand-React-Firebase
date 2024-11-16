@@ -20,7 +20,7 @@ function ContactForm() {
             <form className="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
               <div className="mb-3 w-full">
                 <label
-                  className="block font-medium mb-[2px] text-teal-700"
+                  className="block font-medium mb-[2px] "
                   htmlFor="exampleInput90"
                 >
                   Name
@@ -35,7 +35,7 @@ function ContactForm() {
 
               <div className="mb-3 w-full">
                 <label
-                  className="block font-medium mb-[2px] text-teal-700"
+                  className="block font-medium mb-[2px] "
                   htmlFor="exampleInput90"
                 >
                   Email
@@ -50,7 +50,7 @@ function ContactForm() {
 
               <div className="mb-3 w-full">
                 <label
-                  className="block font-medium mb-[2px] text-teal-700"
+                  className="block font-medium mb-[2px] "
                   htmlFor="exampleInput90"
                 >
                   Message
