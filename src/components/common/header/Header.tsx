@@ -52,7 +52,7 @@ function Header() {
                     </a>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
-                ${isMenuOpen ? 'active-menu' : ''}`} id="mobile-menu-2">
+                ${isMenuOpen ? 'active-menu ' : ''}`} id="mobile-menu-2">
                         <ul className="flex flex-col md:flex-row   font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
                                 <a href="/" className="block py-2 pr-4 pl-3  lg:p-0  font-bold" aria-current="page">Home </a>
@@ -108,7 +108,7 @@ function Header() {
                                 <Link to="/login" className="button-64"><span className="text flex gap-2 items-center !py-1.5 "> <PersonIcon />  Login </span> </Link>
                             </>)
                         }
-                        <button onClick={toggleMenu} data-collapse-toggle="mobile-menu-2" type="button" className=" ml-3 md:hidden   md:bg-green-200 items-center  text-sm text-gray-500  lg:hidden  focus:outline-none  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
+                        <button onClick={toggleMenu} data-collapse-toggle="mobile-menu-2" type="button" className=" ml-3 md:hidden   md:bg-green-200 items-center  text-sm   lg:hidden  focus:outline-none  dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                             {isMenuOpen ? <CloseIcon className="!text-4xl" /> : <MenuIcon className="!text-4xl" />}
                         </button>
                     </div>

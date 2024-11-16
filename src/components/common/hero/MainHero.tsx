@@ -108,20 +108,6 @@ export default function Test() {
             ))}
           </div>
 
-          {/* Indicators */}
-          <div
-            className="flex absolute bottom-5 left-1/2 z-30 -translate-x-1/2 space-x-2"
-            data-carousel-indicators
-          >
-            {carouselItems.map((_, index) => (
-              <button
-                key={index}
-                type="button"
-                className="w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition"
-              ></button>
-            ))}
-          </div>
-
           {/* Navigation Buttons */}
           <button
             type="button"
