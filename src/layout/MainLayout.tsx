@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/common/header/Header";
 import ThemeProviderMode from "../components/ThemeProviderMode";
+import Footer from "../components/common/footer/Footer";
 function MainLayout() {
   return (
       <ThemeProviderMode>
@@ -10,6 +11,7 @@ function MainLayout() {
             <Outlet />
           </div>
         </main>
+        <Footer/>
       </ThemeProviderMode>
   );
 }

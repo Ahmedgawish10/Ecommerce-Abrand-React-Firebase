@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Products from "./Products"
+import Products from "../pages/Products"
 import Test from "./Test";
-import Footer from "./common/footer/Footer";
 import MainHero from "./common/hero/MainHero";
 import { useTheme } from "@mui/material";
 
@@ -21,7 +20,7 @@ const Home = () => {
        {/* <Test/> */}
 
       </div>
-      <Footer/>
+
     </div>
   );
 };

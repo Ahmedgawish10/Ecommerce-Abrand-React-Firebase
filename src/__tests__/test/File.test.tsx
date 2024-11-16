@@ -10,7 +10,7 @@
   
 // });
 import { render } from '@testing-library/react';
- import Users from "../../components/Products"
+ import Users from "../../pages/Products"
 
 test('checks if the div with class exists in the DOM', () => {
   const { container } = render(<Users />);

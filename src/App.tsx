@@ -5,9 +5,10 @@ import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import Register from "./(auth)/Register"
 import Login from "./(auth)/Login";
-import Users from './components/Products';
+import Users from './pages/Products';
 import ProtectedRoute from './(auth)/ProtectedRoute';
 import Home from './components/Home';
+import Contact from './pages/Contact';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       }, {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
    
     ],

@@ -123,19 +123,20 @@ export default function Login() {
                             </div>
     
                             <form action="#" className=" grid grid-cols-6 gap-6" onSubmit={Login}>
-                                <div className="col-span-6">
+
+                                <div className="col-span-6 ">
                                     <FieldInput label="Email" name="Email" type="email" value={email}
                                         onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" />
                                 </div>
     
-                                <div className="col-span-6 sm:col-span-3">
+                                <div className="col-span-6 ">
                                     <FieldInput label="Password" name="Password" type="password" value={password}
                                         onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
                                 </div>
     
-                                <div className="col-span-6 sm:flex sm:items-center sm:gap-4 ">
+                                <div className="col-span-6 sm:flex  flex-col sm:gap-4 ">
                                     <button type="submit" disabled={loginSpiner}
-                                        className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[150px]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+                                        className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[42%]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
                                     >
                                         {loginSpiner ? <div className="register-loader"></div> : <div className="w-[100%]">Login</div>}
                                     </button>
@@ -144,7 +145,7 @@ export default function Login() {
                                             <GoogleIcon className="me-2" />
                                             Continue with Google
                                         </button>
-                                        <button type="button" className="mt-3 xs:flex xs:justify-center text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
+                                        <button type="button" className="mt-3  xs:flex xs:justify-center text-white bg-[#3b5998] hover:bg-[#3b5998]/90 focus:ring-4 focus:outline-none focus:ring-[#3b5998]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2">
                                             <svg className="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                                                 <path fillRule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clipRule="evenodd" />
                                             </svg>

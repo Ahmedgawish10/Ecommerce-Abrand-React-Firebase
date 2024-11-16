@@ -65,7 +65,7 @@ function Header() {
                             </li>
         
                             <li>
-                                <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Contact </a>
+                                <a href="/contact" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Contact </a>
                             </li>
                         </ul>
                     </div>

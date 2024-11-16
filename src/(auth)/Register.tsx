@@ -145,7 +145,7 @@ auth.currentUser && localStorage.getItem("isAuthenticated")? <Navigate replace t
 
       <form action="#" className=" grid grid-cols-6 gap-6" onSubmit={Register}>
 
-        <div className="col-span-6 sm:col-span-3 md:mt-6">
+        <div className="col-span-6  md:mt-6">
         <FieldInput label="User Name" name="FirstName" type="text" value={userName}
          onChange={(e) => setUserName(e.target.value)} placeholder="Enter your name" />
         </div>
@@ -165,9 +165,9 @@ auth.currentUser && localStorage.getItem("isAuthenticated")? <Navigate replace t
          onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm your password" />
         </div>
 
-        <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+        <div className="col-span-6 sm:flex  flex-col sm:gap-4">
           <button type="submit" disabled={registerSpiner}
-            className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[150px]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+            className=" xs:!w-[97%] flex shrink-0 rounded-md border w-[44%]  justify-center border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
           >
       {registerSpiner ? <div className="register-loader"></div>  :<div className="w-[100%]">Register</div>}
     </button>
