@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Hand from "../../../assets/hand.png"
 import Watch from "../../../assets/watch.png"
 import Shoes from "../../../assets/shoes.png"
-
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 export default function Test() {
   useEffect(() => {
     initFlowbite();
@@ -65,19 +65,16 @@ export default function Test() {
               >
                 {item.title ? (
                   <main
-                    className={`dark:bg-gray-800 ${
+                    className={`dark:bg-gray-800 mt-[40px] ${
                       isDarkMode ? "bg-[#111827]" : "bg-white"
                     } relative overflow-hidden`}
                   >
                     <div className="dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
-                      <div className="container px-4 md:px-5 lg:px-0 mx-auto flex flex-wrap md:flex-nowrap relative py-16">
+                      <div className="container px-4 md:px-5 lg:px-0 mx-auto flex flex-wrap flex-col md:flex-row md:flex-nowrap relative">
                         <div className=" flex-1 sm:w-2/3 lg:w-2/5 flex flex-col justify-center relative z-20 order-2 md:order-none pt-5 md:pt-0">
                           <span className="w-20 h-2 bg-[#ff03cc] dark:bg-white mb-12 rounded-md"></span>
                           <h1 className="font-bebas-neue uppercase text-4xl sm:text-8xl font-black flex flex-col leading-none dark:text-white">
                             {item.title}
-                            <span className="text-3xl sm:text-7xl">
-                              {item.subtitle}
-                            </span>
                           </h1>
                           <p className="text-sm sm:text-base pt-3 dark:text-white">
                             {item.description}
@@ -94,7 +91,7 @@ export default function Test() {
                         <div className=" flex-1 w-[100%] md:none lg:w-3/5 relative flex justify-center md:justify-end items-center">
                           <img
                             src={item.imgSrc}
-                            className={` ${item.alt=="Hand"  ?"":"000 w-[60%] sm:w-[60%] md:w-[80%] lg:max-w-sm"}  `}
+                            className={` ${item.alt=="Hand"  ?"":"000 w-[60%] sm:w-[60%] md:w-[80%] lg:max-w-sm"} h-[280px] md:h-auto  `}
                           />
                         </div>
                       </div>
@@ -128,43 +125,18 @@ export default function Test() {
           {/* Navigation Buttons */}
           <button
             type="button"
-            className="flex absolute top-1/2 left-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+            className="flex absolute top-[30vh] left-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
             data-carousel-prev
           >
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 19l-7-7 7-7"
-              ></path>
-            </svg>
+            
+           <NavigateNextIcon className="trnasform rotate-180"/>
           </button>
           <button
             type="button"
-            className="flex absolute top-1/2 right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+            className="flex absolute top-[30vh] right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
             data-carousel-next
           >
-            <svg
-              className="w-5 h-5 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              ></path>
-            </svg>
+            <NavigateNextIcon/>
           </button>
         </div>
       </div>
