@@ -50,17 +50,17 @@ export default function Test() {
 
   return (
     <div>
-      <div className="mx-auto">
+      <div className="mx-auto container lg:px-4 mb-10 md:mb-0">
         <div
           id="default-carousel"
           className="relative rounded-lg overflow-hidden "
           data-carousel="static"
         >
-          <div className="relative h-[100vh]" data-carousel-inner>
+          <div className="relative h-[100vh] sm:h-[650px] lg:h-[500px]" data-carousel-inner>
             {carouselItems.map((item) => (
               <div
                 key={item.id}
-                className="hidden duration-700 ease-in-out"
+                className=" duration-700 ease-in-out flex items-center "
                 data-carousel-item
               >
                 {item.title ? (
@@ -70,8 +70,8 @@ export default function Test() {
                     } relative overflow-hidden`}
                   >
                     <div className="dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
-                      <div className="container px-4 md:px-5 lg:px-0 mx-auto flex flex-wrap flex-col md:flex-row md:flex-nowrap relative">
-                        <div className=" flex-1 sm:w-2/3 lg:w-2/5 flex flex-col justify-center relative z-20 order-2 md:order-none pt-5 md:pt-0">
+                      <div className="container px-4 md:px-5 lg:px-0 mx-auto flex flex-wrap flex-col sm:flex-row md:flex-nowrap relative">
+                        <div className=" flex-1 sm:w-2/3 lg:w-2/5 flex flex-col justify-center relative z-20 order-2 sm:order-none pt-5 md:pt-0">
                           <span className="w-20 h-2 bg-[#ff03cc] dark:bg-white mb-12 rounded-md"></span>
                           <h1 className="font-bebas-neue uppercase text-4xl sm:text-8xl font-black flex flex-col leading-none dark:text-white">
                             {item.title}
@@ -111,15 +111,14 @@ export default function Test() {
           {/* Navigation Buttons */}
           <button
             type="button"
-            className="flex absolute top-[30vh] left-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+            className="flex absolute top-[50vh] left-0 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
             data-carousel-prev
           >
-            
            <NavigateNextIcon className="trnasform rotate-180"/>
           </button>
           <button
             type="button"
-            className="flex absolute top-[30vh] right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
+            className="flex absolute top-[50vh] right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
             data-carousel-next
           >
             <NavigateNextIcon/>

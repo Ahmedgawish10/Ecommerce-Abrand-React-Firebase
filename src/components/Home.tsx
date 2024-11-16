@@ -13,7 +13,7 @@ const Home = () => {
     <div className={`home !relative ${isDarkMode ? "bg-[#111827]" : "bg-white"} `} >
       <MainHero/>
        <Test/>
-      <div className={`homeContainer   container mx-auto px-3 pt-10   !overflow-auto `}>
+      <div className={`homeContainer   container mx-auto px-3   !overflow-auto `}>
         <div className="products">
         <h2 className="pb-6 text-2xl font-semibold" id="products">Explore Our Products</h2>
                <Products/>
