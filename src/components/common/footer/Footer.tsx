@@ -5,7 +5,7 @@ function Footer() {
      <section className="pt-16 pb-7 bg-gray-900 mt-[50px]">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col sm:flex-row items-center justify-between pb-14 border-b border-gray-500 gap-8">
-        <a href="#" className=" uppercase">
+        <a href="#" className=" uppercase font-extrabold">
           ABrand.co
          
         </a>
@@ -47,7 +47,7 @@ function Footer() {
       <div className="py-14 flex flex-col lg:flex-row justify-between gap-8 border-b border-gray-500">
         <div className="w-full max-lg:mx-auto flex flex-col sm:flex-row max-lg:items-center max-lg:justify-between gap-6 md:gap-12 lg:gap-24">
           <div className="">
-            <h6 className="text-lg font-medium text-white mb-7 max-lg:text-center">Pagedone</h6>
+            <h6 className="text-lg font-medium text-white mb-7 max-lg:text-center">Pages</h6>
             <ul className="flex flex-col max-lg:items-center gap-6">
               <li><a href="#"
                   className="text-base font-normal max-lg:text-center text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Home</a>
@@ -64,20 +64,20 @@ function Footer() {
             </ul>
           </div>
           <div className="">
-            <h6 className="text-lg font-medium text-white mb-7 max-lg:text-center">Products</h6>
+            <h6 className="text-lg font-medium text-white mb-7 max-lg:text-center">Categories </h6>
             <ul className="flex flex-col gap-6 max-lg:items-center">
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Figma
-                  UI System</a></li>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">
+                  Electronics</a></li>
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Icons
-                  Assets</a></li>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">
+                   Accessories</a></li>
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Responsive
-                  Blocks</a></li>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">
+                  Home & Living</a></li>
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Components
-                  Library</a></li>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">
+                  Digital Products</a></li>
             </ul>
           </div>
           <div className="">
@@ -87,14 +87,14 @@ function Footer() {
                   className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">FAQs</a>
               </li>
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Quick
-                  Start</a></li>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">
+                  Security & Privacy</a></li>
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Documentation</a>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Platform Documentation</a>
               </li>
               <li><a href="#"
-                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">User
-                  Guide</a></li>
+                  className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">
+                  Order Management & Tracking</a></li>
             </ul>
           </div>
         </div>
@@ -122,7 +122,7 @@ function Footer() {
       </div>
       <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-5 pt-7">
         <span className="text-sm font-normal text-gray-400">
-        <a href="https://pagedone.io/" className="">©pagedone</a> 2023, All rights reserved.
+        <a href="https://pagedone.io/" className="">©ABRAND</a> 2025, All rights reserved.
         </span>
         <div className="relative  text-gray-500 focus-within:text-gray-900 ">
           <div className="absolute inset-y-0 right-6 flex items-center pl-3 pointer-events-none ">
@@ -133,7 +133,9 @@ function Footer() {
           </div>
           <button type="button" id="default-search"
             className="block w-full lg:min-w-[448px] pr-12 pl-6 py-3 text-base font-normal shadow-xs text-gray-50 bg-transparent border border-gray-700 rounded-full placeholder-gray-400 focus:outline-none leading-relaxed transition-all duration-500 "
-           >Have a question? talk to us</button> 
+           >Have a question?
+           <a href="https://portfolio-react-1-mauve.vercel.app/" target="_blank"> Develop by Ahmed Gawish</a>
+           </button> 
         </div>
       </div>
     </div>

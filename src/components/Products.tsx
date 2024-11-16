@@ -27,12 +27,12 @@ const ProductList = () => {
   if (status === "failed") return <p>Error: {error}</p>;
 
   return (
-    <div className="products">
-      <h2 className="pb-4 text-2xl font-semibold">Explore Our Products</h2>
+    <div className="products" >
+ 
       {products.length === 0 ? (
         <p>No products available.</p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] lg:gap-8"  >
           {products.map((product: Product) => (
             <div
               className={` rounded-lg flex justify-center`}
@@ -50,7 +50,7 @@ const ProductList = () => {
         39% OFF
       </span>
     </a>
-    <div className="mt-4 px-5 pb-5">
+    <div className="mt-4 px-5 pb-5" >
       <a href="#">
         <h5 className="text-xl tracking-tight text-slate-900">Nike Air MX Super 2500 - Red</h5>
       </a>

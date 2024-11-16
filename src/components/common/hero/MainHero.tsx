@@ -11,7 +11,7 @@ function MainHero() {
     <div className=" dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
         <div className="container  px-4 md:px-5 lg:px-0 mx-auto  flex flex-wrap md:flex-nowrap relative py-16">
             <div className="sm:w-2/3 lg:w-2/5 flex flex-col justify-center  relative z-20 order-2 md:order-none pt-5 md:pt-0">
-                <span className="w-20 h-2 bg-gray-400 dark:bg-white mb-12 rounded-md">
+                <span className="w-20 h-2 bg-[#ff03cc] dark:bg-white mb-12 rounded-md">
                 </span>
                 <h1 className="font-bebas-neue uppercase text-4xl sm:text-8xl font-black flex flex-col leading-none dark:text-white ">
                     Be on
@@ -19,15 +19,14 @@ function MainHero() {
                         Time
                     </span>
                 </h1>
-                <p className="text-sm sm:text-base pt-3 dark:text-white">
-                    Dimension of reality that makes change possible and understandable. An indefinite and homogeneous environment in which natural events and human existence take place.
-                </p>
+                <p className="text-sm sm:text-base pt-3 dark:text-white ">
+                Stay connected and stylish with the Apple Watch. Featuring seamless connectivity, advanced health tracking, and a sleek design, it’s the perfect blend of innovation and functionality.</p>
                 <div className="flex mt-8">
-                    <a href="#" className="uppercase py-2 px-2 sm:px-4 rounded-lg bg-pink-500 border-2 border-transparent  text-md mr-4 hover:bg-pink-400">
+                    {/* <a href="#" className="uppercase py-2 px-2 sm:px-4 rounded-lg bg-pink-500 border-2 border-transparent  text-md mr-4 hover:bg-pink-400">
                         Get started
-                    </a>
-                    <a href="#" className="uppercase py-2 px-2 sm:px-4 rounded-lg bg-transparent border-2 border-pink-500  dark:text-white hover:bg-pink-500 hover:text-white text-md">
-                        Read more
+                    </a> */}
+                    <a href="#products" className="uppercase py-2 px-2 sm:px-4 rounded-lg bg-transparent border-2 border-pink-500  dark:text-white hover:bg-pink-500 hover:text-white text-md">
+                        Explore Now
                     </a>
                 </div>
             </div>
