@@ -43,8 +43,8 @@ function Header() {
          
     return (
         
-        <header className='main-header border-b border-solid border-[#9f570c] z-50 fixed top-[48px] w-[100%]'>
-            <nav className={`${isDarkMode ? "bg-[#030302]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
+        <header className='main-header border-b border-solid border-[#ffc589] z-50 fixed top-[48px] w-[100%]'>
+            <nav className={`${isDarkMode ? "bg-[#111827]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
                     <a href="https://flowbite.com" className="flex items-center">
                        
@@ -65,7 +65,7 @@ function Header() {
                             </li>
         
                             <li>
-                                <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Contact Us</a>
+                                <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Contact </a>
                             </li>
                         </ul>
                     </div>
