@@ -1,36 +1,44 @@
-import './App.css'
-
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import React, { Suspense } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './App.css';
 import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
-import Register from "./(auth)/Register"
-import Login from "./(auth)/Login";
-import Users from './pages/Products';
 import ProtectedRoute from './(auth)/ProtectedRoute';
-import Home from './components/Home';
-import Contact from './pages/Contact';
-import SingleCategory from './components/common/category/SingleCategory';
+
+// lazy imports for components
+const Register = React.lazy(() => import('./(auth)/Register'));
+const Login = React.lazy(() => import('./(auth)/Login'));
+const Home = React.lazy(() => import('./components/Home'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const SingleCategory = React.lazy(() =>import('./components/common/category/SingleCategory'));
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainLayout />,
     errorElement: <ErrorRoute />,
     children: [
       {
         index: true,
-        element: <Home/>,
+        element: (
+            <Home />
+        ),
       },
       {
-        path: "categories",
-        element:<ProtectedRoute><SingleCategory /></ProtectedRoute> ,
-        loader: ({ request,params }) => {
-          const url = new URL(request.url); 
-          console.log(params);
-          
+        path: 'categories',
+        element: (
+          <ProtectedRoute>
+            <Suspense fallback={<div>Loading Category...</div>}>
+              <SingleCategory />
+            </Suspense>
+          </ProtectedRoute>
+        ),
+        loader: ({ request, params }) => {
+          const url = new URL(request.url);
           const category = url.searchParams.get('category');
           if (!isNaN(Number(category))) {
-            throw new Response("Bad Request", {
-              statusText: "Category not found",
+            throw new Response('Bad Request', {
+              statusText: 'Category not found',
               status: 400,
             });
           }
@@ -38,25 +46,43 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/catgory",
-        element: <Contact />,
+        path: '/catgory',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Contact />
+          </Suspense>
+        ),
       },
       {
-        path: "/register",
-        element: <Register />,
-      }, {
-        path: "/login",
-        element: <Login />,
+        path: '/register',
+        element: (
+          <Suspense fallback={<div>Loading Register...</div>}>
+            <Register />
+          </Suspense>
+        ),
       },
       {
-        path: "/contact",
-        element: <Contact />,
+        path: '/login',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <Login />
+          </Suspense>
+        ),
       },
-   
+      {
+        path: '/contact',
+        element: (
+          <Suspense fallback={<div>Loading Contact...</div>}>
+            <Contact />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);
-export default function App(){
- return <RouterProvider router={router} />
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
+
 

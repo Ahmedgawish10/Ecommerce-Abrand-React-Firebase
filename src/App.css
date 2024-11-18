@@ -1,3 +1,4 @@
+/* menu in mobile */
 @media screen and (max-width: 767px) {
     .inactive-menu {
         background-color: #111827;
@@ -60,11 +61,20 @@
     background-color: #f00000;
   }
 
-
+/* titles wavy */
   .wavy {
     text-decoration-line: underline;
     text-decoration-style: wavy;
     text-decoration-color: #ff5722;
     text-underline-offset: 10px;
     text-decoration-thickness: 4px;
+  }
+  /* pages styles css */
+  .products .love-prodcut{
+    transition: .5s;
+    top: -100px;
+  }
+  .products .product-img:hover .love-prodcut {
+    transition: .6s;
+    top: 10px;
   }

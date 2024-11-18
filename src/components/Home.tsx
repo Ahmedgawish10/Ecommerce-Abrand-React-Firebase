@@ -12,7 +12,6 @@ const Home = () => {
   return (
     <div className={`home !relative ${isDarkMode ? "bg-[#111827]" : "bg-white"} `} >
       <MainHero />
-
       <div className={`homeContainer   container mx-auto px-3   !overflow-auto `}>
         <div className="products">
           <h2 className="pb-12 text-2xl font-semibold wavy" id="products">Explore Our Products</h2>
