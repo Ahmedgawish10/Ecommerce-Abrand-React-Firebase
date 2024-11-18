@@ -48,14 +48,14 @@ function Header() {
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
                     <a href="/" className="flex items-center">
 
-                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white uppercase">ABRAND.CO</span>
+                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white uppercase ">ABRAND.CO</span>
                     </a>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
                 ${isMenuOpen ? 'active-menu ' : ''}`} id="mobile-menu-2">
                         <ul className="flex flex-col md:flex-row   font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
-                                <a href="/" className="block py-2 pr-4 pl-3  lg:p-0  font-bold" aria-current="page">Home </a>
+                                <a href="/" className="block py-2 pr-4 pl-3    lg:p-0  font-bold" aria-current="page">Home </a>
                             </li>
                             <li>
                                 <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  font-bold lg:p-0">Shop</a>

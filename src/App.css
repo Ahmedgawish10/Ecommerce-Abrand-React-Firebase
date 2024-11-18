@@ -59,3 +59,12 @@
     padding: 10px;
     background-color: #f00000;
   }
+
+
+  .wavy {
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: #ff5722;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 4px;
+  }

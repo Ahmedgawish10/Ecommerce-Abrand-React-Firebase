@@ -15,11 +15,11 @@ const Home = () => {
 
       <div className={`homeContainer   container mx-auto px-3   !overflow-auto `}>
         <div className="products">
-          <h2 className="pb-12 text-2xl font-semibold" id="products">Explore Our Products</h2>
+          <h2 className="pb-12 text-2xl font-semibold wavy" id="products">Explore Our Products</h2>
           <Products />
         </div>
         <div className="categories pt-[60px]">
-          <h2 className="pb-6 pt-10 text-2xl font-semibold" id="products">Top Categories</h2>
+          <h2 className="pb-6 pt-10 text-2xl font-semibold wavy" id="products">Top Categories</h2>
           <Categories />
         </div>
         {/* <Test/> */}
