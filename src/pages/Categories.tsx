@@ -17,7 +17,7 @@ const Highlight1 = () => {
         {
             category: "Sports",
             title: "Sports ",
-            description: "Active Lifestyle & Outdoor Adventures",
+            description: "Active Lifestyle & Outdoor Adventures more",
             image: O3,
             link: "/categories?category=Sports"
         },
@@ -39,7 +39,7 @@ const Highlight1 = () => {
 
     return (
         <section id="testimonies" className="py-12">
-            <div className="max-w-6xl mx-8 md:mx-10 lg:mx-20 xl:mx-auto">
+            <div className="container px-8">
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
                     {categories.map((category, index) => (
                         <ul className="space-y-8" key={index}>

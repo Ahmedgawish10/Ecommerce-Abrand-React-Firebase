@@ -3,6 +3,7 @@ import Products from "../pages/Products"
 import Categories from "../pages/Categories";
 import MainHero from "./common/hero/MainHero";
 import { useTheme } from "@mui/material";
+import Test from "../../src/pages/Test";
 
 const Home = () => {
   const theme = useTheme();
@@ -18,9 +19,10 @@ const Home = () => {
           <Products />
         </div>
         <div className="categories pt-[60px]">
-          <h2 className="pb-6 text-2xl font-semibold" id="products">Top Categories</h2>
+          <h2 className="pb-6 pt-10 text-2xl font-semibold" id="products">Top Categories</h2>
           <Categories />
         </div>
+        {/* <Test/> */}
 
       </div>
 

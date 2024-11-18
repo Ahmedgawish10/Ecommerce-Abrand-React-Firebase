@@ -24,3 +24,38 @@
         height: 100vh !important;
     }
 }
+
+
+
+.pagination {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+  }
+  
+  .pagination li {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #f00000;
+  }
+  
+  .pagination .active {
+    background-color: rgb(0, 0, 0);
+    font-weight: bold;
+  }
+  
+  .pagination .disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .prev, .next {
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: blue;
+  }
+  .active2{
+    display: inline-block;
+    padding: 10px;
+    background-color: #f00000;
+  }
