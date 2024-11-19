@@ -54,6 +54,10 @@ export default function Login() {
             setLoginSpiner(false);
         }
     };
+
+    const handleSignInGoogle = async () => {
+        await handleGoogleSignIn(navigate);
+      };
     return (
         <div className="login-section">  
        {auth.currentUser && localStorage.getItem("isAuthenticated") ?<Navigate replace to="/" />:<section className="">
@@ -141,7 +145,7 @@ export default function Login() {
                                         {loginSpiner ? <div className="register-loader"></div> : <div className="w-[100%]">Login</div>}
                                     </button>
                                     <div className="provider flex gap-4 xs:flex-col xs:gap-0 mt-2">
-                                        <button type="button" onClick={handleGoogleSignIn} className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
+                                        <button type="button" onClick={handleSignInGoogle} className="mt-3  xs:flex xs:justify-center text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2">
                                             <GoogleIcon className="me-2" />
                                             Continue with Google
                                         </button>

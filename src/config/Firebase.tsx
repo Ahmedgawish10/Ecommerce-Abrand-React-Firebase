@@ -18,24 +18,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
 export const storage = getStorage(app);
 
 
 // Sign In with Google 
-export const handleGoogleSignIn = async () => {
+export const handleGoogleSignIn = async (navigate:any) => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
     const userEmail = result.user.email;
     const userId = result.user.uid;
 
-    // Reference to the Firestore document using the user's UID as the document ID
+    // reference to the Firestore document using the user id 
     const userDocRef = doc(db, "users", userId);
     const userDocSnapshot = await getDoc(userDocRef);
 
     if (!userDocSnapshot.exists()) {
-      // If the user doesn't exist, create a new document with the user's UID as the ID
       await setDoc(userDocRef, {
         provider: result.providerId,
         uid: userId,
@@ -45,7 +43,7 @@ export const handleGoogleSignIn = async () => {
       });
     }
     localStorage.setItem("isAuthenticated", "true");
-    <Navigate replace to='/'/>
+    navigate("/")
   } catch (err) {
     console.error("Error during Google sign-in:", err);
   }
@@ -56,7 +54,7 @@ export const subscribeToAuthChanges = (setUser:any) => {
       setUser(user);
   });
 };
-// logout fun
+// logout func
 export const logout = async () => {
   try {
     await signOut(auth);
