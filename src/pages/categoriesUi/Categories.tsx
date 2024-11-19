@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import O from "../assets/download (1).png"
-import O1 from "../assets/red-and-white-bag (1).png"
-import O3 from "../assets/bicycle-rider-and-bike (1).png"
-import O4 from "../assets/yellow-crown-and-black-book (1).png"
+import O from "../../assets/download (1).png"
+import O1 from "../../assets/red-and-white-bag (1).png"
+import O3 from "../../assets/bicycle-rider-and-bike (1).png"
+import O4 from "../../assets/yellow-crown-and-black-book (1).png"
 
 const Highlight1 = () => {
     const categories = [

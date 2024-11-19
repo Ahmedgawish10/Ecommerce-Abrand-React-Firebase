@@ -9,8 +9,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
+import { useAppSelector } from "../../../store/hooks";
 // import { Typography } from '@mui/material';
 function Header() {
+    const { wishlist, status, error } = useAppSelector((state) => state.wishlists);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,9 +77,16 @@ function Header() {
                             <>
                                 <div className="cart flex gap-1 mr-2">
                                     <SearchIcon className="cursor-pointer" />
+                                    <div className="wishlist-box relative">
                                     <FavoriteBorderIcon className="cursor-pointer" />
+                                    <span className={`wish-count flex justify-center items-center absolute top-[-18px] right-[-6px] rounded-full 
+                                     w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{wishlist.length}</span>
+                                    </div>
+                                    <div className="cart-box relative">
                                     <ShoppingCartIcon className="cursor-pointer" />
-
+                                    <span className={`wish-count flex justify-center items-center absolute top-[-18px] right-[-6px] rounded-full 
+                                     w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{0}</span>
+                                    </div>
                                 </div>
                                 <div className="relative cursor-pointer w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600" id="avatarButton" onClick={toggleProfile}>
                                     <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>

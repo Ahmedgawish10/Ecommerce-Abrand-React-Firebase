@@ -4,7 +4,7 @@ import { Product } from '../../../types/Shared';
 import { db } from '../../../config/Firebase';
 
 // Fetch Wishlist
-export const fetchWishlist = createAsyncThunk<Product[], string>(
+export const fetchUserWishlists = createAsyncThunk<Product[], string>(
   'wishlist/fetchWishlist',
   async (userId) => {
     const wishlistCollection = collection(db, `users/${userId}/wishlist`);
@@ -19,7 +19,7 @@ export const fetchWishlist = createAsyncThunk<Product[], string>(
     });
   }
 );
-
+// add to wishlist
 export const addToWishlist = createAsyncThunk<Product, { userId: string; product: Product }>(
   'wishlist/addToWishlist',
   async ({ userId, product }) => {
@@ -29,8 +29,7 @@ export const addToWishlist = createAsyncThunk<Product, { userId: string; product
     return product; 
   }
 );
-
-// Remove from Wishlist
+// remove from wishlist
 export const removeFromWishlist = createAsyncThunk<Product, { userId: string; product: Product }>(
   'wishlist/removeFromWishlist',
   async ({ userId, product }) => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Products from "../pages/Products"
-import Categories from "../pages/Categories";
+import Categories from "../pages/categoriesUi/Categories";
 import MainHero from "./common/hero/MainHero";
 import { useTheme } from "@mui/material";
 import Test from "../../src/pages/Test";

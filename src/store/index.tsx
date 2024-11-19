@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import productsSlice from "./products/ProductsSlice"
-import wishLists from "./wishLists/ProductsSlice"
+import wishLists from "./wishLists/WishListsSlice"
 
 export  const store= configureStore({
   reducer: {
     products: productsSlice,
-    wishlist:wishLists
+    wishlists:wishLists
   },
   middleware: (getDefaultMiddleware) =>  getDefaultMiddleware({serializableCheck: false}),
 })

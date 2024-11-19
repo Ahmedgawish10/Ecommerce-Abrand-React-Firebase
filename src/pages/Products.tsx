@@ -2,17 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../store/hooks";
 import { useAppDispatch } from "../store/hooks";
 import { Product } from "../types/Shared";
-import ReactPaginate from "react-paginate";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import fetchProducts from "../store/products/action/FetchProducts";
 import Pagination from "../components/common/paginate/Paginate";
-import Wish from "../pages/Add"
-import Wish2 from "../pages/Wish"
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import SingleWishlist from "./wishlistUi/SingleWishlist";
 const ProductList = () => {
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(0);
-
   const { products, status, error } = useAppSelector((state) => state.products);
 
   useEffect(() => {
@@ -36,22 +32,13 @@ const ProductList = () => {
   if (status === "failed") return <p>Error: {error}</p>;
 
   const itemsPerPage = 1;
-
-
   const offset = currentPage * itemsPerPage;
   const currentItems = products.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(products.length / itemsPerPage);
 
   const handlePageClick = (event: any) => {
-    console.log(event);
-
     setCurrentPage(event.selected);
   };
-
-  console.log(products);
-
-
-
   return (
     <div className="products" >
       {/* <Pagination pageCount={pageCount}  onPageChange={handlePageClick} currentPage={currentPage} /> */}
@@ -75,7 +62,7 @@ const ProductList = () => {
                     <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
                       39% OFF
                     </span>
-                    <Wish  productProps={product}/>
+                    <SingleWishlist  productProps={product}/>
                     
                   </div>
                   <div className="mt-4 px-5 pb-5" >
