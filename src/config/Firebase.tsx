@@ -3,7 +3,7 @@ import { getAuth,onAuthStateChanged,signOut } from "firebase/auth";
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getStorage } from "firebase/storage";
-
+import { Link, useNavigate,Navigate } from 'react-router-dom';
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -45,7 +45,7 @@ export const handleGoogleSignIn = async () => {
       });
     }
     localStorage.setItem("isAuthenticated", "true");
-     window.location.href="/"
+    <Navigate replace to='/'/>
   } catch (err) {
     console.error("Error during Google sign-in:", err);
   }
