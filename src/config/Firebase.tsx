@@ -1,7 +1,6 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth,onAuthStateChanged,signOut } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, serverTimestamp, setDoc, where } from "firebase/firestore";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
@@ -28,10 +27,25 @@ export const handleGoogleSignIn = async () => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
-    localStorage.setItem("isAuthenticated", "true");
+    const userEmail = result.user.email;
+    const userId = result.user.uid;
 
-    console.log("User info:", result.user); // User info available in result.user
-    // Redirect or update state as needed after successful login
+    // Reference to the Firestore document using the user's UID as the document ID
+    const userDocRef = doc(db, "users", userId);
+    const userDocSnapshot = await getDoc(userDocRef);
+
+    if (!userDocSnapshot.exists()) {
+      // If the user doesn't exist, create a new document with the user's UID as the ID
+      await setDoc(userDocRef, {
+        provider: result.providerId,
+        uid: userId,
+        userName: result.user.displayName,
+        email: userEmail,
+        timeStamp: serverTimestamp(),
+      });
+    }
+    localStorage.setItem("isAuthenticated", "true");
+     window.location.href="/"
   } catch (err) {
     console.error("Error during Google sign-in:", err);
   }

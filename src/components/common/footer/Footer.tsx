@@ -21,23 +21,23 @@ function Footer() {
         </a>
         <div className="flex items-center gap-4">
           <a href="#"
-            className="p-3 rounded-full bg-white text-gray-700 group transition-all duration-500 hover:bg-amber-500 hover:text-white focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 20 20" fill="none">
+            className="p-3 rounded-full bg-white text-gray-700 group transition-all duration-500 hover:bg-amber-500 hover:text-[blue] focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none">
               <path
                 d="M13.077 10.7339L13.4445 8.43347H11.1808V6.93821C11.1808 6.30919 11.4968 5.69455 12.5074 5.69455H13.5511V3.73561C12.9433 3.64013 12.3292 3.58847 11.7136 3.58105C9.8505 3.58105 8.63412 4.68453 8.63412 6.67941V8.43347H6.56885V10.7339H8.63412V16.298H11.1808V10.7339H13.077Z"
                 fill="currentColor" />
             </svg>
           </a>
           <a href="#"
-            className="p-3 rounded-full bg-white text-gray-900 group transition-all duration-500 hover:bg-amber-500 hover:text-white focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
+            className="p-3 rounded-full bg-white text-gray-900 group transition-all duration-500 hover:bg-amber-500 hover:text-[purple] focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
                  <InstagramIcon className='!text-[21px]'/>
           </a>
           <a href="#"
-            className="p-3 rounded-full bg-white text-gray-700 group transition-all duration-500 hover:bg-amber-500 hover:text-white focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
+            className="p-3 rounded-full bg-white text-gray-700 group transition-all duration-500 hover:bg-amber-500 hover:text-[#000000] focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
                     <XIcon className='!text-[21px]'/>
           </a>
           <a href="#"
-            className="p-3 rounded-full bg-white text-gray-700 group transition-all duration-500 hover:bg-amber-500 hover:text-white focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
+            className="p-3 rounded-full bg-white text-gray-700 group transition-all duration-500 hover:bg-amber-500 hover:text-[red] focus-within:outline-0 focus-within:bg-amber-500 focus-within:text-white">
                    <YouTubeIcon className='!text-[21px]'/>
           </a>
         </div>

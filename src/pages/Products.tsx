@@ -6,7 +6,8 @@ import ReactPaginate from "react-paginate";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import fetchProducts from "../store/products/action/FetchProducts";
 import Pagination from "../components/common/paginate/Paginate";
-
+import Wish from "../pages/Add"
+import Wish2 from "../pages/Wish"
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const ProductList = () => {
   const dispatch = useAppDispatch();
@@ -74,10 +75,8 @@ const ProductList = () => {
                     <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
                       39% OFF
                     </span>
-                    <div className="love-prodcut absolute right-0 flex justify-center items-center w-[40px] h-[40px]  rounded-full bg-[#0f172a] p-2 text-[#E74040]">
-                    <FavoriteBorderIcon />
-                    </div>
-
+                    <Wish  productProps={product}/>
+                    
                   </div>
                   <div className="mt-4 px-5 pb-5" >
                     <a href="#">
@@ -134,7 +133,7 @@ const ProductList = () => {
           ))}
         </div>
       )}
-
+{/* <Wish2  /> */}
     </div>
   );
 };

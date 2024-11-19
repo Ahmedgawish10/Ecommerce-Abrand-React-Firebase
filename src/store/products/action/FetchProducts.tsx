@@ -1,7 +1,6 @@
-// src/features/products/fetchProducts.ts
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { collection, getDocs } from 'firebase/firestore';
-import { Product } from '../../../types/Shared'; // Ensure this path is correct
+import { Product } from '../../../types/Shared'; 
 import { db } from '../../../config/Firebase';
 
 const fetchProducts = createAsyncThunk<Product[]>(

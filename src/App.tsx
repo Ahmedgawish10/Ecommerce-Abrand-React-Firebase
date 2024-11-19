@@ -44,19 +44,12 @@ const router = createBrowserRouter([
           }
           return true;
         },
-      },
-      {
-        path: '/catgory',
-        element: (
-          <Suspense fallback={<div>Loading...</div>}>
-            <Contact />
-          </Suspense>
-        ),
-      },
+      }
+      ,
       {
         path: '/register',
         element: (
-          <Suspense fallback={<div>Loading Register...</div>}>
+          <Suspense fallback={<div></div>}>
             <Register />
           </Suspense>
         ),
@@ -64,7 +57,7 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div></div>}>
             <Login />
           </Suspense>
         ),
@@ -72,7 +65,7 @@ const router = createBrowserRouter([
       {
         path: '/contact',
         element: (
-          <Suspense fallback={<div>Loading Contact...</div>}>
+          <Suspense fallback={<div></div>}>
             <Contact />
           </Suspense>
         ),
