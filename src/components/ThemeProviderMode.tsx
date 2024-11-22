@@ -6,7 +6,7 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 export default function ThemeMode({ children }: any) {
   const [darkMode, setDarkMode] = useState(() => {
     const getDarkMode = localStorage.getItem("isDarkModeActive");
-    return getDarkMode ? JSON.parse(getDarkMode) == true : false;
+    return getDarkMode ? JSON.parse(getDarkMode): true;
   });
 
   useEffect(() => {
