@@ -3,7 +3,7 @@ import Products from "../pages/Products"
 import Categories from "../pages/categories/Categories";
 import MainHero from "./common/hero/MainHero";
 import { useTheme } from "@mui/material";
-import Test from "../../src/pages/Test";
+// import Test from "../../src/pages/Test";
 
 const Home = () => {
   const theme = useTheme();
