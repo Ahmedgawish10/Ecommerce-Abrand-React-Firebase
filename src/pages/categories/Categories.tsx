@@ -5,7 +5,7 @@ import O1 from "../../assets/red-and-white-bag (1).png"
 import O3 from "../../assets/bicycle-rider-and-bike (1).png"
 import O4 from "../../assets/yellow-crown-and-black-book (1).png"
 
-const Highlight1 = () => {
+const Categories = () => {
     const categories = [
         {
             category: "Phones",
@@ -73,4 +73,4 @@ const Highlight1 = () => {
     );
 };
 
-export default Highlight1;
+export default Categories;

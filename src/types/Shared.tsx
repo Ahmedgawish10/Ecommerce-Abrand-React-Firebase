@@ -1,9 +1,9 @@
 export  interface Product {
+  userId: any;
   id?: string;
   name?: string;
   price?: number;
   imageUrl?:string;
   category?:string;
-  quantity?: number; 
   timeStamp?:string
 }

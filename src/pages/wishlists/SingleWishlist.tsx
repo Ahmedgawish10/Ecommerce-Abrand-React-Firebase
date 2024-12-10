@@ -37,8 +37,8 @@ const WishlistItem = ({ productProps }: any) => {
       }
       setToggleLove(!toggleLove); 
     } else {
-      console.error("User is not logged in");
-    }
+      toast.error("Please log in first to add to the wishList.");
+        }
   };
 
   return (

@@ -2,34 +2,36 @@ import React, { useEffect } from 'react';
 import { useAppSelector } from "../store/hooks";
 import { useAppDispatch } from "../store/hooks";
 import { fetchUserWishlists } from "../store/wishLists/action/WishListsActs";
+
 import { RootState } from '../store';
 import { auth } from '../config/Firebase';
 
+import { fetchUserCart } from '../store/carts/action/CartsActs';
+
 const Wishlist = () => {
   const dispatch = useAppDispatch();
-  const { wishlist, status, error } = useAppSelector((state: RootState) => state.wishlists);
+  const { wishlist} = useAppSelector((state) => state.wishlists);
+  const { cart,status } = useAppSelector((state) => state.cart);
 
   useEffect(() => {
-    const userId = auth?.currentUser?.uid;
-    console.log(userId);
-    
-    if (userId) {
-        dispatch(fetchUserWishlists(userId)); 
+    const userId = auth?.currentUser?.uid;    
+    if (userId) {      
+        //dispatch(fetchUserWishlists(userId)); 
+        dispatch(fetchUserCart(userId))
       
     }
-  }, [dispatch]);
+  }, [dispatch,auth?.currentUser?.uid]);
   
-console.log(wishlist);
+console.log(cart);
 
   if (status === 'loading') return <p>Loading...</p>;
-  if (status === 'failed') return <p>Error: {error}</p>;
 
   return (
     <div>
-      <h1>My Wishlist</h1>
+      <h1 onClick={()=>dispatch(fetchUserCart("5555555555555"))}>My Wishlist</h1>
       <ul>
-        {wishlist.map((product:any) => (
-          <li key={product.id}>{product.name}</li>
+        {cart.map((product:any,index) => (
+          <li key={index}>{product.quantity}</li>
         ))}
       </ul>
     </div>

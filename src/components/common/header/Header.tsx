@@ -10,9 +10,15 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import { useAppSelector } from "../../../store/hooks";
+import { useAppDispatch } from "../../../store/hooks";
 // import { Typography } from '@mui/material';
+import { fetchUserWishlists } from './../../../store/wishLists/action/WishListsActs';
+import { fetchUserCart } from "../../../store/carts/action/CartsActs";
 function Header() {
     const { wishlist, status, error } = useAppSelector((state) => state.wishlists);
+    const { cart } = useAppSelector((state) => state.cart);
+
+    const dispatch=useAppDispatch()
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,11 +26,8 @@ function Header() {
     const [profile, setProfile] = useState(false);
     const theme = useTheme();
     const isDarkMode = theme.palette.mode === 'dark';
-
-
     useEffect(() => {
         initFlowbite();
-
         const unsubscribe = auth.onAuthStateChanged((firbaseUser: any) => {
             setUserAuth(firbaseUser);
             setLoading(false);
@@ -32,6 +35,14 @@ function Header() {
 
         return () => unsubscribe();
     }, []);
+    useEffect(() => {
+        const userId = auth?.currentUser?.uid;    
+        if (userId) {      
+            dispatch(fetchUserWishlists(userId))
+            dispatch(fetchUserCart(userId))
+
+        }
+      }, [dispatch,auth?.currentUser?.uid]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -41,8 +52,6 @@ function Header() {
         setProfile(!profile);
         setIsMenuOpen(false)
     };
-
-
     return (
 
         <header className='main-header border-b border-solid border-[#ffc589] z-50 fixed top-[48px] w-[100%]'>
@@ -50,24 +59,24 @@ function Header() {
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
                     <a href="/" className="flex items-center">
 
-                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white uppercase ">ABRAND.CO</span>
+                        <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white uppercase ">ABRAND</span>
                     </a>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
                 ${isMenuOpen ? 'active-menu ' : ''}`} id="mobile-menu-2">
                         <ul className="flex flex-col md:flex-row   font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
-                                <a href="/" className="block py-2 pr-4 pl-3    lg:p-0  font-bold" aria-current="page">Home </a>
+                                <Link to="/" className="block py-2 pr-4 pl-3    lg:p-0  font-bold" aria-current="page">Home </Link>
                             </li>
                             <li>
-                                <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  font-bold lg:p-0">Shop</a>
+                                <Link to="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  font-bold lg:p-0">Shop</Link>
                             </li>
                             <li>
-                                <a href="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Features</a>
+                                <Link to="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Features</Link>
                             </li>
 
                             <li>
-                                <a href="/contact" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Contact </a>
+                                <Link to="/contact" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Contact </Link>
                             </li>
                         </ul>
                     </div>
@@ -83,10 +92,11 @@ function Header() {
                                      w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{wishlist.length}</span>
                                     </div>
                                     <div className="cart-box relative">
+                                        <Link to={'/cart'}>
                                     <ShoppingCartIcon className="cursor-pointer" />
                                     <span className={`wish-count flex justify-center items-center absolute top-[-18px] right-[-6px] rounded-full 
-                                     w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{0}</span>
-                                    </div>
+                                     w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{cart.length}</span>
+                                    </Link></div>
                                 </div>
                                 <div className="relative cursor-pointer w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600" id="avatarButton" onClick={toggleProfile}>
                                     <svg className="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>

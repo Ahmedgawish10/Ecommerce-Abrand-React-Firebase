@@ -4,12 +4,14 @@ import './App.css';
 import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import ProtectedRoute from './(auth)/ProtectedRoute';
-// lazy imports for components
+
 const Register = React.lazy(() => import('./(auth)/Register'));
 const Login = React.lazy(() => import('./(auth)/Login'));
 const Home = React.lazy(() => import('./components/Home'));
 const Contact = React.lazy(() => import('./pages/Contact'));
-const SingleCategory = React.lazy(() =>import('./pages/categoriesUi/SingleCategory'));
+const SingleCategory = React.lazy(() =>import('./pages/categories/SingleCategory'));
+const Carts = React.lazy(() =>import('./pages/carts/UserCarts'));
+
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
         index: true,
         element: (
             <Home />
+        ),
+      },
+      {
+        path: '/cart',
+        element: (
+          <Suspense fallback={<div></div>}>
+             <ProtectedRoute><Carts /></ProtectedRoute>
+          </Suspense>
         ),
       },
       {

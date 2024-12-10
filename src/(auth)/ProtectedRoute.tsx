@@ -1,4 +1,3 @@
-// PrivateRoute.js
 import { Navigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { auth, subscribeToAuthChanges } from "../config/Firebase";
@@ -14,7 +13,7 @@ const ProtectedRoute = ({ children }: any) => {
       setLoading(false);
     });
 
-    return () => unsubscribe(); // Clean up the subscription on unmount
+    return () => unsubscribe(); 
   }, []);
 
   if (loading) {

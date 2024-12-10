@@ -4,8 +4,11 @@ import { useAppDispatch } from "../store/hooks";
 import { Product } from "../types/Shared";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import fetchProducts from "../store/products/action/FetchProducts";
+import SingleWishlist from "./wishlists/SingleWishlist";
+import { auth } from '../config/Firebase';
+import { addToCart, removeFromCart } from '../store/carts/action/CartsActs';
 import Pagination from "../components/common/paginate/Paginate";
-import SingleWishlist from "./wishlistUi/SingleWishlist";
+import toast from "react-hot-toast";
 const ProductList = () => {
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(0);
@@ -39,6 +42,16 @@ const ProductList = () => {
   const handlePageClick = (event: any) => {
     setCurrentPage(event.selected);
   };
+
+       const handleAddToCart=(product:any)=>{
+        if (auth.currentUser?.uid) {          
+          dispatch(addToCart({userId: auth.currentUser.uid, product}));
+        } else {
+          toast.error("Please log in first to add to the cart.");
+                }
+       }
+
+
   return (
     <div className="products" >
       {/* <Pagination pageCount={pageCount}  onPageChange={handlePageClick} currentPage={currentPage} /> */}
@@ -63,6 +76,7 @@ const ProductList = () => {
                       39% OFF
                     </span>
                     <SingleWishlist  productProps={product}/>
+                    
                     
                   </div>
                   <div className="mt-4 px-5 pb-5" >
@@ -105,13 +119,14 @@ const ProductList = () => {
                         <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">5.0</span>
                       </div>
                     </div>
-                    <a
-                      href="#"
-                      className="flex items-center gap-3 justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    <div
+                    onClick={() => {handleAddToCart(product) }}
+                      
+                      className="flex cursor-pointer items-center gap-3 justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
                     >
                       <ShoppingCartIcon />
                       Add to cart
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
