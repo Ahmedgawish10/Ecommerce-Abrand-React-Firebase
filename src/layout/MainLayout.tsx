@@ -4,6 +4,7 @@ import ThemeProviderMode from "../components/ThemeProviderMode";
 import Footer from "../components/common/footer/Footer";
 import Wish from "../pages/Wish";
 function MainLayout() {
+
   return (
       <ThemeProviderMode>
         <div className="App">

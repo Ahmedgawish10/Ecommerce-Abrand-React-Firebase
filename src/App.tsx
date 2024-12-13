@@ -4,6 +4,8 @@ import './App.css';
 import ErrorRoute from './components/Error';
 import MainLayout from './layout/MainLayout';
 import ProtectedRoute from './(auth)/ProtectedRoute';
+import PaymentSuccess from './payment/PaymentSuccess';
+import PaymentCancel from './payment/PaymentCancel';
 
 const Register = React.lazy(() => import('./(auth)/Register'));
 const Login = React.lazy(() => import('./(auth)/Login'));
@@ -30,6 +32,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div></div>}>
              <ProtectedRoute><Carts /></ProtectedRoute>
+          </Suspense>
+        ),
+      },
+      {
+        path: '/success',
+        element: (
+          <Suspense fallback={<div></div>}>
+             <ProtectedRoute><PaymentSuccess/></ProtectedRoute>
+          </Suspense>
+        ),
+      },
+      {
+        path: '/cancel',
+        element: (
+          <Suspense fallback={<div></div>}>
+             <ProtectedRoute><PaymentCancel/></ProtectedRoute>
           </Suspense>
         ),
       },

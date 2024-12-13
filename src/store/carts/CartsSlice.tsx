@@ -1,14 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Product } from '../../types/Shared';
-import { fetchUserCart, addToCart, removeFromCart } from './action/CartsActs';
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../../config/Firebase';
+import { fetchUserCart, addToCart, removeFromCart, clearCart } from './action/CartsActs'; // Import the clearCart thunk
 import toast from 'react-hot-toast';
 
 interface CartItem extends Product {
   quantity: number;
 }
-
 
 interface CartState {
   cart: CartItem[];
@@ -29,7 +26,7 @@ const cartSlice = createSlice({
     increaseQuantity: (state, action: PayloadAction<string>) => {
       const product = state.cart.find((item) => item.id === action.payload);
       if (product) {
-        product.quantity = (product.quantity??0)+1;
+        product.quantity = (product.quantity ?? 0) + 1;
       }
     },
     decreaseQuantity: (state, action: PayloadAction<string>) => {
@@ -39,7 +36,7 @@ const cartSlice = createSlice({
       } else {
         state.cart = state.cart.filter((item) => item.id !== action.payload);
       }
-    },
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -63,14 +60,12 @@ const cartSlice = createSlice({
         const itemIndex = state.cart.findIndex(item => item.id === action.payload.id);        
         if (itemIndex >= 0) {
           state.cart[itemIndex].quantity += action.payload.quantity;
-          toast.success(`${state.cart[itemIndex].name} already in cart`)          
+          toast.success(`${state.cart[itemIndex].name} quantity increased `)          
         } else {
           state.cart.push(action.payload);
           toast.success(`${action.payload.name} added to cart`)          
-
         }
         state.status = "succeeded";
-            
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.status = 'failed';
@@ -84,8 +79,13 @@ const cartSlice = createSlice({
         const itemIndex = state.cart.findIndex(item => item.id === action.payload.id);
         if (itemIndex >= 0) {
           state.cart[itemIndex].quantity -= 1;
+          // state.cart.splice(itemIndex, 1);
+
           if (state.cart[itemIndex].quantity === 0) {
+            console.log(state.cart[itemIndex]);
+            
             state.cart.splice(itemIndex, 1);
+            toast.success(` removed form cart`)
           }
         }
         state.status = "succeeded";
@@ -93,6 +93,18 @@ const cartSlice = createSlice({
       .addCase(removeFromCart.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'Failed to remove from cart';
+      })
+      // Clear Cart
+      .addCase(clearCart.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(clearCart.fulfilled, (state) => {
+        state.status = 'succeeded';
+        state.cart = []; 
+      })
+      .addCase(clearCart.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'Failed to clear cart';
       });
   },
 });

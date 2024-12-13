@@ -6,9 +6,7 @@ import { db } from '../../../config/Firebase';
 // Fetch Cart
 export const fetchUserCart = createAsyncThunk<Product[], string>(
   'cart/fetchCart',
-  async (userId) => {
-    console.log(9);
-    
+  async (userId) => {    
     const cartCollection = collection(db, `users/${userId}/cart`);
     const cartSnapshot = await getDocs(cartCollection);
 
@@ -32,10 +30,8 @@ export const addToCart = createAsyncThunk<Product, { userId: string; product: Pr
     if (cartDocSnapshot.exists()) {      
       const currentQuantity = cartDocSnapshot.data()?.quantity ?? 0;
       await setDoc(cartDoc, { ...product, userId, quantity: currentQuantity + 1 });      
-    //  return { ...product, quantity: currentQuantity + 1 };
     }else {
       await setDoc(cartDoc, { ...product, userId, quantity: 1 });
-      //return { ...product, quantity: 1 };
     }
     return { ...product, quantity: 1 };
   }
@@ -66,5 +62,18 @@ export const removeFromCart = createAsyncThunk<Product, { userId: string; produc
 
     // Return the product object to update the state
     return product;
+  }
+);
+//clear cart when use already payment 
+export const clearCart = createAsyncThunk<void, string>(
+  'cart/clearCart',
+  async (userId) => {
+    const cartCollection = collection(db, `users/${userId}/cart`);
+    const cartSnapshot = await getDocs(cartCollection);
+    
+    // loop through each document and delete synchronously
+    for (const doc of cartSnapshot.docs) {
+      await deleteDoc(doc.ref); 
+    }
   }
 );

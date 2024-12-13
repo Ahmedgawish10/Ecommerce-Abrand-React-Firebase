@@ -92,7 +92,7 @@ function Header() {
                                      w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{wishlist.length}</span>
                                     </div>
                                     <div className="cart-box relative">
-                                        <Link to={'/cart'}>
+                                        <Link to={'/cart#cart'}>
                                     <ShoppingCartIcon className="cursor-pointer" />
                                     <span className={`wish-count flex justify-center items-center absolute top-[-18px] right-[-6px] rounded-full 
                                      w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{cart.length}</span>
