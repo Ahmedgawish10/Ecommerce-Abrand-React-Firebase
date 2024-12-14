@@ -1,25 +1,30 @@
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); // Use environment variable for Stripe secret key
-require("dotenv").config(); // Ensure the .env file is loaded
+const stripe = require("stripe")("sk_test_51P85jmLPTeuzPbczbWIjE4PIvfNMg12md2wXQUsdgkJouBkciMTn6HCON9apASZ34BgnEXw8GE7bp48PNxekvjdo00oWx0a3kO");;
+require("dotenv").config();
 
 const app = express();
 
-// CORS Middleware Setup
-app.use(cors({
-  origin: '*', // Allow all origins or specify specific domains like 'http://localhost:3000'
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-}));
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: [
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "low-Origin",
+      "Access-Control-Allow-Origin",
+    ],
+  })
+)
 
-app.use(express.json());
+ app.use(express.json());
 
-// Create Checkout Session
 app.post("/create-checkout-session", async (req, res) => {
   try {
     const { amount, currency } = req.body;
-
-    // Input Validation
     if (!amount || !currency) {
       return res.status(400).send({ error: "Amount and currency are required." });
     }
@@ -27,7 +32,6 @@ app.post("/create-checkout-session", async (req, res) => {
       return res.status(400).send({ error: "Amount must be a positive number." });
     }
 
-    // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -43,8 +47,8 @@ app.post("/create-checkout-session", async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.SUCCESS_URL}?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.CANCEL_URL}`,
+      success_url: 'http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'http://localhost:5173/cart',
     });
 
     res.status(200).send({ sessionId: session.id });
@@ -54,7 +58,6 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-// Retrieve Checkout Session
 app.get("/session/:sessionId", async (req, res) => {
   try {
     const { sessionId } = req.params;
