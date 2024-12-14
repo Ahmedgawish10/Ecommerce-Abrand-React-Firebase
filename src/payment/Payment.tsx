@@ -1,6 +1,6 @@
-
 import { loadStripe } from "@stripe/stripe-js";
 import { auth } from "../config/Firebase";
+import axios from "axios";
 
 // Type for the component props
 interface CheckoutBtnProps {
@@ -8,7 +8,8 @@ interface CheckoutBtnProps {
 }
 
 const CheckoutBtn = () => {
-  const publishableKey = "pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf";
+  const publishableKey =
+    "pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf";
   const stripePromise = loadStripe(publishableKey);
 
   const handleCheckout = async () => {
@@ -18,21 +19,41 @@ const CheckoutBtn = () => {
       return;
     }
 
-    const response = await fetch("https://backend-stripe-37k1j6pol-ahmedgawish.vercel.app/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ amount: 8000, currency: "usd" }), // Example: $10
-    });
+    try {
+      // Define axios configuration
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*", // Allowing cross-origin requests (make sure backend also allows this)
+        },
+        method: "POST",
+        url: "https://backend-stripe-2cwlcq4d7-ahmedgawish.vercel.app/create-checkout-session", // Your backend endpoint
+        data: {
+          amount: 8000, // Example: $80.00
+          currency: "usd",
+        },
+        crossorigin: true,
+        withCredentials: true, 
+        // Allows sending cookies with the request
+      };
 
-    const { sessionId } = await response.json();  
-    const result = await stripe?.redirectToCheckout({
-      sessionId: sessionId,  
-    });
+      // Make the POST request using axios
+      const response = await axios(config);
 
-    if (result?.error) {
-      window.alert(result?.error?.message);
+      const { sessionId } = response.data; // Get sessionId from the response
+
+      // Redirect to Stripe checkout
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionId,
+      });
+
+      if (result?.error) {
+        window.alert(result.error.message);
+      }
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      window.alert("An error occurred. Please try again.");
     }
   };
 
