@@ -4,11 +4,13 @@ const stripe = require("stripe")("sk_test_51P85jmLPTeuzPbczbWIjE4PIvfNMg12md2wXQ
 require("dotenv").config();
 
 const app = express();
+app.use(express.json());
+app.use(cors())
 
 // app.use(
 //   cors({
 //     origin: "*",
-    // methods: ["GET", "POST"],
+//     methods: ["GET", "POST"],
 //     allowedHeaders: [
 //       "Origin",
 //       "X-Requested-With",
@@ -19,18 +21,8 @@ const app = express();
 //     ],
 //   })
 // )
-app.use(cors())
-app.use(
-  cors(),(res,req,next)=>{
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    
-    next()
-})
 
 
-
-
- app.use(express.json());
 
 app.post("/create-checkout-session", async (req, res) => {
   try {
