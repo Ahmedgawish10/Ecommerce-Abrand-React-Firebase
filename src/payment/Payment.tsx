@@ -18,7 +18,7 @@ const CheckoutBtn = () => {
       return;
     }
 
-    const response = await fetch("http://localhost:5000/create-checkout-session", {
+    const response = await fetch("https://backend-stripe-8zsmdz3gd-ahmedgawish.vercel.app/create-checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
