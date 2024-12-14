@@ -6,9 +6,12 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(cors());
-app.use(express.json()); 
-
+app.use(cors({
+  origin: "https://ecommerce-react-firebase-five.vercel.app", // Your frontend URL
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type,Authorization"
+}));
+app.use(express.json());
 
 app.post("/create-checkout-session", async (req, res) => {
   try {
@@ -62,7 +65,7 @@ app.get("/session/:sessionId", async (req, res) => {
       console.error("Error fetching session:", error);
       res.status(500).send({ error: error.message });
     }
-  });
+});
   
 // Start the server
 const PORT = process.env.PORT || 5000;
