@@ -23,7 +23,7 @@ const SuccessPage = () => {
     if (sessionId) {
       const fetchSession = async () => {
         try {
-          const response = await fetch(`https://backend-stripe-2cwlcq4d7-ahmedgawish.vercel.app/session/${trimmedSessionId}`);
+          const response = await fetch(`http://localhost:5000/session/${trimmedSessionId}`);
           const data = await response.json();
 
           if (data && data.payment_status === "paid") {

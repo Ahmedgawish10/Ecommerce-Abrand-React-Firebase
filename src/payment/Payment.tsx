@@ -25,16 +25,16 @@ const CheckoutBtn = () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          "Access-Control-Allow-Origin": "*", // Allowing cross-origin requests (make sure backend also allows this)
+          "Access-Control-Allow-Origin": "*", 
         },
         method: "POST",
-        url: "https://backend-stripe-21s102xkp-ahmedgawish.vercel.app/create-checkout-session", // Your backend endpoint
+        url: "https://backend-stripe-foblilh00-ahmedgawish.vercel.app/create-checkout-session", // Your backend endpoint
         data: {
           amount: 8000, // Example: $80.00
           currency: "usd",
         },
-        crossorigin: true,
-        withCredentials: true, 
+       //crossorigin: true,
+        withCredentials: false, 
         // Allows sending cookies with the request
       };
 
