@@ -8,7 +8,7 @@ const app = express();
 // app.use(
 //   cors({
 //     origin: "*",
-//     methods: ["GET", "POST"],
+    // methods: ["GET", "POST"],
 //     allowedHeaders: [
 //       "Origin",
 //       "X-Requested-With",
@@ -20,6 +20,15 @@ const app = express();
 //   })
 // )
 app.use(cors())
+app.use(
+  cors(),(res,req,next)=>{
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    
+    next()
+})
+
+
+
 
  app.use(express.json());
 
