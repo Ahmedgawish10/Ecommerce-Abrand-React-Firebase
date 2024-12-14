@@ -21,20 +21,25 @@ const CheckoutBtn = () => {
 
     try {
       // Define axios configuration
+      // https://backend-stripe-6r55iyj1x-ahmedgawish.vercel.app 
+      // http://localhost:5000
+      const token = await auth.currentUser?.getIdToken();
+
       const config = {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
           "Access-Control-Allow-Origin": "*", 
+          Authorization: `Bearer ${token}`,
         },
         method: "POST",
-        url: "https://backend-stripe-foblilh00-ahmedgawish.vercel.app/create-checkout-session", // Your backend endpoint
+        url: "https://backend-stripe-jfizr7ai1-ahmedgawish.vercel.app/create-checkout-session", // Your backend endpoint
         data: {
           amount: 8000, // Example: $80.00
           currency: "usd",
         },
        //crossorigin: true,
-        withCredentials: false, 
+        //withCredentials: false, 
         // Allows sending cookies with the request
       };
 
