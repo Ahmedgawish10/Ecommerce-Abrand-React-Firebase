@@ -5,20 +5,21 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST"],
-    allowedHeaders: [
-      "Origin",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "low-Origin",
-      "Access-Control-Allow-Origin",
-    ],
-  })
-)
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//     allowedHeaders: [
+//       "Origin",
+//       "X-Requested-With",
+//       "Content-Type",
+//       "Accept",
+//       "low-Origin",
+//       "Access-Control-Allow-Origin",
+//     ],
+//   })
+// )
+app.use(cors())
 
  app.use(express.json());
 
