@@ -5,15 +5,18 @@ require("dotenv").config();
 
 const app = express();
 
-// CORS Middleware Setup
-app.use(cors({
-  origin: "https://ecommerce-react-firebase-five.vercel.app", // Your frontend URL
-  methods: "GET,POST",
-  allowedHeaders: "Content-Type,Authorization",
-}));
-
+// // CORS Middleware Setup
+// app.use(cors({
+//   origin: "https://ecommerce-react-firebase-five.vercel.app", // Your frontend URL
+//   methods: "GET,POST",
+//   allowedHeaders: "Content-Type,Authorization",
+// }));
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 // Allow pre-flight CORS requests
-app.options('*', cors());  // Handle OPTIONS requests (pre-flight)
+// app.options('*', cors());  // Handle OPTIONS requests (pre-flight)
 
 app.use(express.json());
 
