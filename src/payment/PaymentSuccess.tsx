@@ -30,6 +30,8 @@ const SuccessPage = () => {
             setPaymentStatus("Payment successful!");
             if (auth?.currentUser?.uid) {
               dispatch(clearCart(auth?.currentUser?.uid));
+              console.log("yes",data);
+              
             }
           } else {
             setPaymentStatus("Payment failed.");

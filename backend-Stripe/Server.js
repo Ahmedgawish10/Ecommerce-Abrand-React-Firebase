@@ -5,7 +5,10 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+
+app.use(cors({
+  origin:"*",
+}))
 
 // app.use(
 //   cors({
@@ -34,26 +37,26 @@ app.post("/create-checkout-session", async (req, res) => {
       return res.status(400).send({ error: "Amount must be a positive number." });
     }
 
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: currency,
-            product_data: {
-              name: 'Sample Product',
-            },
-            unit_amount: amount,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: 'payment',
-      success_url: 'http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'http://localhost:5173/cart',
-    });
+    // const session = await stripe.checkout.sessions.create({
+    //   payment_method_types: ['card'],
+    //   line_items: [
+    //     {
+    //       price_data: {
+    //         currency: currency,
+    //         product_data: {
+    //           name: 'Sample Product',
+    //         },
+    //         unit_amount: amount,
+    //       },
+    //       quantity: 1,
+    //     },
+    //   ],
+    //   mode: 'payment',
+    //   success_url: 'http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}',
+    //   cancel_url: 'http://localhost:5173/cart',
+    // });
 
-    res.status(200).send({ sessionId: session.id });
+    res.status(200).send({ sessionId: "9998989"});
   } catch (error) {
     console.error("Stripe error:", error);
     res.status(500).send({ error: error.message });
