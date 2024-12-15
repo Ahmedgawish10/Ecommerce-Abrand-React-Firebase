@@ -31,7 +31,7 @@ const CheckoutBtn = () => {
           Accept: "application/json",
         },
         method: "POST",
-        url: "http://localhost:5000/create-checkout-session", 
+        url: "https://backend-stripe-7qn5yh0f3-ahmedgawish.vercel.app/create-checkout-session", 
         data: {
           amount: 8000, // Example: $80.00
           currency: "usd",

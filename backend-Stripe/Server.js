@@ -79,6 +79,34 @@ app.get("/session/:sessionId", async (req, res) => {
   }
 });
 
+
+
+app.post("/testpost", async (req, res) => {
+  try {
+  
+
+    res.status(200).send({ sessionId: "9998989"});
+  } catch (error) {
+    console.error("Stripe error:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+app.get("/testget", async (req, res) => {
+  try {
+  
+
+    res.status(200).send({ sessionId: "9998989"});
+  } catch (error) {
+    console.error("Stripe error:", error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+
+
+
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
