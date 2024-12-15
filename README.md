@@ -1,4 +1,4 @@
-# E-commerce React + Firebase +Jest for Testing +( in Progress)
+# E-commerce React + Firebase + Stripe +Jest for Testing +( in Progress)
 
 This is an eCommerce application built with TypeScript, Firebase, and React. The project includes testing with React Testing Library to ensure component functionality and maintainability. Note: This is a work in progress, and additional features and refinements are actively being developed.<br>
 
