@@ -55,7 +55,7 @@ function ContactForm() {
   };
   
   return (
-    <div  className={`contact pt-[20px] ${ isDarkMode ?"bg-[#111827]":"bg-white" }`}>
+    <div  className={`contact pt-[20px] lg:h-screen ${ isDarkMode ?"bg-[#111827]":"bg-white" }`}>
       <div className="container mx-auto px-2 md:px-4">
         <section>
           <div className="flex justify-center">

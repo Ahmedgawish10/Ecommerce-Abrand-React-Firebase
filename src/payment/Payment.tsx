@@ -20,8 +20,7 @@ const CheckoutBtn = () => {
     }
 
     try {
-      // Define axios configuration
-      // https://backend-stripe-6r55iyj1x-ahmedgawish.vercel.app 
+      // https://testpayment-liart.vercel.app 
       // http://localhost:5000
       const token = await auth.currentUser?.getIdToken();
       const response = await axios.post("https://testpayment-liart.vercel.app/create-checkout-session",

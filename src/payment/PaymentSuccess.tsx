@@ -23,6 +23,8 @@ const SuccessPage = () => {
     if (sessionId) {
       const fetchSession = async () => {
         try {
+          // https://testpayment-liart.vercel.app 
+          // http://localhost:5000
           const response = await fetch(`https://testpayment-liart.vercel.app/session/${trimmedSessionId}`);
           const data = await response.json();
 
@@ -30,8 +32,6 @@ const SuccessPage = () => {
             setPaymentStatus("Payment successful!");
             if (auth?.currentUser?.uid) {
               dispatch(clearCart(auth?.currentUser?.uid));
-              console.log("yes",data);
-              
             }
           } else {
             setPaymentStatus("Payment failed.");
