@@ -24,37 +24,29 @@ const CheckoutBtn = () => {
       // https://backend-stripe-6r55iyj1x-ahmedgawish.vercel.app 
       // http://localhost:5000
       const token = await auth.currentUser?.getIdToken();
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+      const response = await axios.post("https://testpayment-liart.vercel.app/create-checkout-session",
+        {
+          amount: 8000, 
+          currency: "usd", 
         },
-        method: "POST",
-        url: "https://backend-stripe-7qn5yh0f3-ahmedgawish.vercel.app/create-checkout-session", 
-        data: {
-          amount: 8000, // Example: $80.00
-          currency: "usd",
-        },
-       //crossorigin: true,
-        //withCredentials: false, 
-      };
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
+      console.log(response);
+      const { sessionId } = response.data; 
 
-      // Make the POST request using axios
-      const response = await axios(config);
-   console.log(response);
-   
+      // Redirect to Stripe checkout
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionId,
+      });
 
-      // const { sessionId } = response.data; 
-
-      // // Redirect to Stripe checkout
-      // const result = await stripe.redirectToCheckout({
-      //   sessionId: sessionId,
-      // });
-
-      // if (result?.error) {
-      //   window.alert(result.error.message);
-      // }
+      if (result?.error) {
+        window.alert(result.error.message);
+      }
     } catch (error) {
       console.error("Error creating checkout session:", error);
       window.alert("An error occurred. Please try again.");
