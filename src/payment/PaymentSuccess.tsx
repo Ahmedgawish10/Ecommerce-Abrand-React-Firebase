@@ -23,7 +23,7 @@ const SuccessPage = () => {
     if (sessionId) {
       const fetchSession = async () => {
         try {
-          const response = await fetch(`https://testpayment-liart.vercel.app//session/${trimmedSessionId}`);
+          const response = await fetch(`https://testpayment-liart.vercel.app/session/${trimmedSessionId}`);
           const data = await response.json();
 
           if (data && data.payment_status === "paid") {
