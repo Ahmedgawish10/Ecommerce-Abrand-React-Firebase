@@ -3,7 +3,7 @@ import { useAppSelector } from "../store/hooks";
 import { useAppDispatch } from "../store/hooks";
 import { fetchUserWishlists } from "../store/wishLists/action/WishListsActs";
 
-import { RootState } from '../store';
+import { RootState } from '../store/Store';
 import { auth } from '../config/Firebase';
 
 import { fetchUserCart } from '../store/carts/action/CartsActs';

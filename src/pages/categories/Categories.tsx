@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import O from "../../assets/download (1).png"
-import O1 from "../../assets/red-and-white-bag (1).png"
-import O3 from "../../assets/bicycle-rider-and-bike (1).png"
-import O4 from "../../assets/yellow-crown-and-black-book (1).png"
+import PhoneImg from "../../assets/download (1).png"
+import FashionImg from "../../assets/red-and-white-bag (1).png"
+import SportImg from "../../assets/bicycle-rider-and-bike (1).png"
+import BookImg from "../../assets/yellow-crown-and-black-book (1).png"
 
 const Categories = () => {
     const categories = [
@@ -11,28 +11,28 @@ const Categories = () => {
             category: "Phones",
             title: "Electronics ",
             description: "Tech Innovator, Laptops Phones,Watches",
-            image: O,
+            image: PhoneImg,
             link: "/categories?category=Phones"
         },
         {
             category: "Sports",
             title: "Sports ",
             description: "Active Lifestyle & Outdoor Adventures more",
-            image: O3,
+            image: SportImg,
             link: "/categories?category=Sports"
         },
         {
             category: "Fashion",
             title: "Fashion ",
             description: "Stylish & Trendy Clothing & Accessories",
-            image: O1,
+            image: FashionImg,
             link: "/categories?category=Fashion"
         },
         {
             category: "Books",
             title: "Books ",
             description: "Explore New Worlds with Your Favorite Books",
-            image: O4,
+            image: BookImg,
             link: "/categories?category=Books"
         }
     ];

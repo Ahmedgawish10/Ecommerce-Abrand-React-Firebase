@@ -6,12 +6,11 @@ import axios from "axios";
 interface CheckoutBtnProps {
   products: any;
 }
-
-const CheckoutBtn = () => {
-  const publishableKey =
-    "pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf";
-  const stripePromise = loadStripe(publishableKey);
-
+type BtnCheckoutProps = {
+  amount: number;
+};
+const CheckoutBtn = ({amount}:BtnCheckoutProps) => {
+  const stripePromise = loadStripe( import.meta.env.VITE_STRIPE_PUBLISHKEY );
   const handleCheckout = async () => {
     const stripe = await stripePromise;
     if (!stripe) {
@@ -25,7 +24,7 @@ const CheckoutBtn = () => {
       const token = await auth.currentUser?.getIdToken();
       const response = await axios.post("https://testpayment-liart.vercel.app/create-checkout-session",
         {
-          amount: 8000, 
+          amount:Number(amount.toFixed(0))*100, 
           currency: "usd", 
         },
         {
@@ -35,9 +34,7 @@ const CheckoutBtn = () => {
           },
         }
       );
-      console.log(response);
       const { sessionId } = response.data; 
-
       // Redirect to Stripe checkout
       const result = await stripe.redirectToCheckout({
         sessionId: sessionId,

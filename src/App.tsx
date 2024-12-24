@@ -6,6 +6,7 @@ import MainLayout from './layout/MainLayout';
 import ProtectedRoute from './(auth)/ProtectedRoute';
 import PaymentSuccess from './payment/PaymentSuccess';
 import PaymentCancel from './payment/PaymentCancel';
+import UserOrders from './pages/orders/UserOrders';
 
 const Register = React.lazy(() => import('./(auth)/Register'));
 const Login = React.lazy(() => import('./(auth)/Login'));
@@ -52,16 +53,24 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: '/orders',
+        element: (
+          <Suspense fallback={<div></div>}>
+             <ProtectedRoute><UserOrders /></ProtectedRoute>
+          </Suspense>
+        ),
+      },
+      {
         path: 'categories',
         element: (
           <ProtectedRoute>
-            <Suspense fallback={<div>Loading Category...</div>}>
+            <Suspense fallback={<div className='h-screen'>Loading...</div>}>
               <SingleCategory />
             </Suspense>
           </ProtectedRoute>
         ),
         loader: ({ request, params }) => {
-          const url = new URL(request.url);
+          const url = new URL(request.url);          
           const category = url.searchParams.get('category');
           if (!isNaN(Number(category))) {
             throw new Response('Bad Request', {

@@ -14,13 +14,6 @@ const WishlistItem = ({ productProps }: any) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const userId = auth?.currentUser?.uid;
-    if (userId) {
-        dispatch(fetchUserWishlists(userId));
-    }
-  }, []); 
-
-  useEffect(() => {
     const productExists = wishlist.some((product) => product.id === productProps.id);    
     setToggleLove(productExists);    
   }, [wishlist]); 

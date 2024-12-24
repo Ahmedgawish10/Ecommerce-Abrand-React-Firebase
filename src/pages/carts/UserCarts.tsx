@@ -8,12 +8,15 @@ import { addToCart, removeFromCart } from "../../store/carts/action/CartsActs";
 import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import Stripe22 from "../../payment/Payment";
+import BtnChekout from "../../payment/Payment";
+import { Link } from "react-router-dom";
 
 const Carts = () => {  
-  const stripePromise = useMemo(() => loadStripe("pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf"),
-    []
-  );
+
+  const stripePromise = useMemo(() =>    
+    loadStripe("pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf")
+
+  ,[]);
 
   const dispatch = useAppDispatch();
   const { cart, status, error } = useAppSelector((state) => state.cart);
@@ -27,6 +30,8 @@ if (status=="idle") {
     const userId = auth?.currentUser?.uid;
     if (userId) {
       startTransition(() => {
+   
+        
         dispatch(fetchUserCart(userId)); 
       });
     }
@@ -46,6 +51,21 @@ if (status=="idle") {
       toast.error("Please log in first to add to the cart.");
             }
    }
+
+
+const [totalAmount,setTotalAmount]=useState<number>(0)
+   const calculateTotal = () => {
+    const subtotal = cart.reduce( (sum, item) => sum + +(item.price ?? 0) * +item.quantity,  0 );
+    const taxes = 2; 
+    const shipping = 0;
+    const total = subtotal + taxes + shipping;    
+    setTotalAmount(+total?.toFixed(2)); 
+  };
+
+  // Recalculate the total whenever the cart changes
+  useEffect(() => {
+    calculateTotal();
+  }, [cart]);
   return (
     <div>
       <div className="container mx-auto" id="cart">
@@ -111,8 +131,7 @@ if (status=="idle") {
                     <div className="flex justify-between mb-2">
                       <span className="font-semibold">Total</span>
                       <span className="font-semibold">
-                        ${(
-                          cart.reduce(
+                        ${(cart.reduce(
                             (sum, item) => sum + +(item.price ?? 0) * +item.quantity,
                             0
                           ) + 1.99
@@ -120,13 +139,20 @@ if (status=="idle") {
                       </span>
                     </div>
                     <Elements stripe={stripePromise}>
-                      <Stripe22 />
+                      <BtnChekout amount={totalAmount} />
                     </Elements>
                   </div>
                 </div>
               </div>
             ) : (
-              "Cart is empty"
+              <div>
+              <p>   Cart is empty     </p>
+               <button className=" mt-5 bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md mr-6 xs:mr-2">
+                <Link to="/" replace={true}>
+                  Home
+                </Link>
+                </button>
+              </div>
             )}
           </div>
         </div>

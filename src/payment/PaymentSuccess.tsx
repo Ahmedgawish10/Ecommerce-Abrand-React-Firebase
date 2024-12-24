@@ -2,7 +2,8 @@ import { useEffect, useState, useTransition } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../config/Firebase";
 import { clearCart } from "../store/carts/action/CartsActs";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addToOrders } from './../store/orders/UserOrdersSlice';
 
 const SuccessPage = () => {
   const location = useLocation();
@@ -14,9 +15,12 @@ const SuccessPage = () => {
   const dispatch = useAppDispatch();
 
   const [isPending, startTransition] = useTransition();
+  const {cart}=useAppSelector((state)=>state.cart)
+  const {orders}=useAppSelector((state)=>state.order)
 
   useEffect(() => {
-    const trimmedSessionId = sessionId?.replace(/"/g, '');
+    const trimmedSessionId = sessionId?.replace(/"/g, '').slice(0, -5);
+    
     if (!sessionId) {
       navigate("/", { replace: true });
     }
@@ -30,7 +34,12 @@ const SuccessPage = () => {
 
           if (data && data.payment_status === "paid") {
             setPaymentStatus("Payment successful!");
+            
             if (auth?.currentUser?.uid) {
+               let orderUser:any=[...cart];
+              if (cart.length > 0) {                
+                dispatch(addToOrders({order:orderUser,orderId:data.payment_intent}));
+              }
               dispatch(clearCart(auth?.currentUser?.uid));
             }
           } else {
@@ -46,7 +55,7 @@ const SuccessPage = () => {
 
       fetchSession();
     }
-  }, [sessionId, auth.currentUser, dispatch]);
+  }, [sessionId, auth.currentUser, dispatch,cart]);
 
   return (
     <div>

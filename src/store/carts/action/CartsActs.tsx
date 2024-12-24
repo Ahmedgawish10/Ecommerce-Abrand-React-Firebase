@@ -48,19 +48,13 @@ export const removeFromCart = createAsyncThunk<Product, { userId: string; produc
     if (cartSnap.exists()) {
       const currentData = cartSnap.data();
       if (currentData.quantity > 1) {
-        // Decrement the quantity
         await updateDoc(cartDoc, { quantity: currentData.quantity - 1 });
       } else {
-        // Remove the product if the quantity is 1
         await deleteDoc(cartDoc);
       }
     } else {
-      console.log(8);
-
       throw new Error(`Cart item ${product.name} does not exist.`);
     }
-
-    // Return the product object to update the state
     return product;
   }
 );
@@ -70,7 +64,6 @@ export const clearCart = createAsyncThunk<void, string>(
   async (userId) => {
     const cartCollection = collection(db, `users/${userId}/cart`);
     const cartSnapshot = await getDocs(cartCollection);
-    
     // loop through each document and delete synchronously
     for (const doc of cartSnapshot.docs) {
       await deleteDoc(doc.ref); 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../config/Firebase';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export default function SingleCategory() {
@@ -11,13 +11,12 @@ export default function SingleCategory() {
   const searchCategory = location.search.split("=")[1].toLowerCase()
 
   useEffect(() => {
-    const fetchPhones = async () => {
+    const fetchSingleCat = async () => {
       try {
         const productsRef = collection(db, 'products');
+        const DocCat = query(productsRef, where('category', '==', searchCategory));
 
-        const phonesQuery = query(productsRef, where('category', '==', searchCategory));
-
-        const querySnapshot = await getDocs(phonesQuery);
+        const querySnapshot = await getDocs(DocCat);
         const phonesList = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
@@ -31,7 +30,7 @@ export default function SingleCategory() {
       }
     };
 
-    fetchPhones();
+    fetchSingleCat();
   }, []);
 
   if (loading) {
@@ -39,16 +38,21 @@ export default function SingleCategory() {
       top: 0,
       behavior: "smooth",
     });
-    return <div id="f" className='h-[100vh]' >Loading...</div>;
+    return <div id="f" className='h-screen' ></div>;
   }
-
-  console.log(data);
 
   return (
     <div className='h-[100vh] ' >
 
       {data.length === 0 ? (
-        <div className='text-center pt-[80px] container mx-auto text-3xl  '> category data empty.</div>
+        <div className='text-center pt-[80px] container mx-auto text-3xl  '>
+          <p>No products for this category available at the moment.</p>
+          <button className=" mt-5 bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md mr-6 xs:mr-2">
+                <Link to="/" replace={true}>
+                  Home
+                </Link>
+                </button>
+        </div>
       ) : (
         <div className="cat container mx-auto">
           <div className="h2 text-3xl pt-12"  >Category: {searchCategory}</div>

@@ -27,7 +27,7 @@ export default function ThemeMode({ children }: any) {
         <CssBaseline />
         <div className={`${darkMode?"bg-[#111827]":"bg-white"} header1 h-[50px] w-[100%] fixed z-50 top-0 bg flex justify-center 00`}>
         <div className=" container mx-auto fixed z-50 top-0 flex justify-between items-center  p-3">
-          <div >01064880594</div>
+          <div ><a href="#">Abrand@gmail.com</a></div>
           <div className="cursor-pointer" onClick={handleChangeMode}>
             {darkMode ? <DarkModeIcon /> : <WbSunnyIcon />}
           </div>

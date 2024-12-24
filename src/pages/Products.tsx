@@ -7,8 +7,10 @@ import fetchProducts from "../store/products/action/FetchProducts";
 import SingleWishlist from "./wishlists/SingleWishlist";
 import { auth } from '../config/Firebase';
 import { addToCart, removeFromCart } from '../store/carts/action/CartsActs';
+
 import Pagination from "../components/common/paginate/Paginate";
 import toast from "react-hot-toast";
+import { addToOrders } from './../store/orders/UserOrdersSlice';
 const ProductList = () => {
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState(0);
@@ -19,6 +21,8 @@ const ProductList = () => {
       dispatch(fetchProducts());
     }
   }, [status, dispatch]);
+
+ 
 
   if (status === "loading") {
     return (
@@ -46,6 +50,8 @@ const ProductList = () => {
        const handleAddToCart=(product:any)=>{
         if (auth.currentUser?.uid) {          
           dispatch(addToCart({userId: auth.currentUser.uid, product}));
+          dispatch(addToOrders({userId: auth.currentUser.uid, product}));
+
         } else {
           toast.error("Please log in first to add to the cart.");
                 }

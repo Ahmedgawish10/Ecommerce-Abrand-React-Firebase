@@ -11,7 +11,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import PersonIcon from '@mui/icons-material/Person';
 import { useAppSelector } from "../../../store/hooks";
 import { useAppDispatch } from "../../../store/hooks";
-// import { Typography } from '@mui/material';
 import { fetchUserWishlists } from './../../../store/wishLists/action/WishListsActs';
 import { fetchUserCart } from "../../../store/carts/action/CartsActs";
 function Header() {
@@ -38,7 +37,7 @@ function Header() {
     useEffect(() => {
         const userId = auth?.currentUser?.uid;    
         if (userId) {      
-            dispatch(fetchUserWishlists(userId))
+           dispatch(fetchUserWishlists(userId))            
             dispatch(fetchUserCart(userId))
 
         }
@@ -57,10 +56,9 @@ function Header() {
         <header className='main-header border-b border-solid border-[#ffc589] z-50 fixed top-[48px] w-[100%]'>
             <nav className={`${isDarkMode ? "bg-[#111827]" : "bg-white"} border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800`} mobile-menu-2="2" >
                 <div className="flex flex-wrap justify-between items-center container mx-auto relative">
-                    <a href="/" className="flex items-center">
-
+                    <Link to="/" className="flex items-center">
                         <span className="self-center text-[17px] font-semibold whitespace-nowrap dark:text-white uppercase ">ABRAND</span>
-                    </a>
+                    </Link>
 
                     <div className={`inactive-menu  md:flex justify-between items-center lg:flex lg:w-auto lg:order-1 
                 ${isMenuOpen ? 'active-menu ' : ''}`} id="mobile-menu-2">
@@ -69,7 +67,7 @@ function Header() {
                                 <Link to="/" className="block py-2 pr-4 pl-3    lg:p-0  font-bold" aria-current="page">Home </Link>
                             </li>
                             <li>
-                                <Link to="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  font-bold lg:p-0">Shop</Link>
+                                <a href="/#categories" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0  font-bold lg:p-0">Categories</a>
                             </li>
                             <li>
                                 <Link to="#" className="block py-2 md:pr-2 lg:mr-4 pl-3  border-b md:border-b-0 border-gray-100 lg:border-0 font-bold lg:p-0">Features</Link>
@@ -114,7 +112,7 @@ function Header() {
                                             <Link to="https://dashboard-ahmedgawish.vercel.app/" target="_blank" rel="noreferrer" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</Link>
                                         </li>
                                         <li>
-                                            <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                            <Link to="/orders" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Orders</Link>
                                         </li>
                                     </ul>
                                     <div className="py-1">
