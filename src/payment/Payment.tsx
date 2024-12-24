@@ -10,7 +10,8 @@ type BtnCheckoutProps = {
   amount: number;
 };
 const CheckoutBtn = ({amount}:BtnCheckoutProps) => {
-  const stripePromise = loadStripe( import.meta.env.VITE_STRIPE_PUBLISHKEY );
+  //import.meta.env.VITE_STRIPE_PUBLISHKEY 
+  const stripePromise = loadStripe("pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf" );
   const handleCheckout = async () => {
     const stripe = await stripePromise;
     if (!stripe) {
