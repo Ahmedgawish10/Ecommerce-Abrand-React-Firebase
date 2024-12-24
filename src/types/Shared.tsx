@@ -1,6 +1,6 @@
 export  interface Product {
   orders: any;
-  totalAmount: ReactNode;
+  totalAmount: any;
   createdAt: string | number | Date;
   userId: any;
   id?: string;

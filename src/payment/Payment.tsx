@@ -22,8 +22,9 @@ const CheckoutBtn = ({amount}:BtnCheckoutProps) => {
     try {
       // https://testpayment-liart.vercel.app 
       // http://localhost:5000
+      //https://testpayment-abegv4b3l-ahmedgawish.vercel.app
       const token = await auth.currentUser?.getIdToken();
-      const response = await axios.post("https://testpayment-liart.vercel.app/create-checkout-session",
+      const response = await axios.post("https://testpayment-abegv4b3l-ahmedgawish.vercel.app/create-checkout-session",
         {
           amount:Number(amount.toFixed(0))*100, 
           currency: "usd", 
