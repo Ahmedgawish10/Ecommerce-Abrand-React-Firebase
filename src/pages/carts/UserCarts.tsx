@@ -20,13 +20,12 @@ const Carts = () => {
 
   const dispatch = useAppDispatch();
   const { cart, status, error } = useAppSelector((state) => state.cart);
-if (status=="idle") {  
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-}
+
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
     const userId = auth?.currentUser?.uid;
     if (userId) {
       startTransition(() => {

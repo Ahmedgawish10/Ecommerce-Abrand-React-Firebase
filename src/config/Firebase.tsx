@@ -44,6 +44,8 @@ export const handleGoogleSignIn = async (navigate:any) => {
     }
     localStorage.setItem("isAuthenticated", "true");
     navigate("/")
+    console.log("d");
+    
   } catch (err) {
     console.error("Error during Google sign-in:", err);
   }

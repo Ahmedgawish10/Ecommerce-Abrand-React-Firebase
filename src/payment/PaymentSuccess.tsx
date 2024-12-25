@@ -33,8 +33,7 @@ const SuccessPage = () => {
           const data = await response.json();
 
           if (data && data.payment_status === "paid") {
-            setPaymentStatus("Payment successful!");
-            
+            setPaymentStatus("Payment successful!");            
             if (auth?.currentUser?.uid) {
                let orderUser:any=[...cart];
               if (cart.length > 0) {                
