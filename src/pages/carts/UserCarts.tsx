@@ -4,23 +4,16 @@ import { useAppSelector } from "../../store/hooks";
 import { auth } from "../../config/Firebase";
 import { fetchUserCart } from "../../store/carts/action/CartsActs";
 import { addToCart, removeFromCart } from "../../store/carts/action/CartsActs";
-
-import toast from "react-hot-toast";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import BtnChekout from "../../payment/Payment";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Carts = () => {  
-
-  const stripePromise = useMemo(() =>    
-    loadStripe("pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf")
-
-  ,[]);
-
+  const stripePromise = useMemo(() =>loadStripe("pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf"),[]);
   const dispatch = useAppDispatch();
   const { cart, status, error } = useAppSelector((state) => state.cart);
-
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -29,16 +22,14 @@ const Carts = () => {
     const userId = auth?.currentUser?.uid;
     if (userId) {
       startTransition(() => {
-   
-        
-        dispatch(fetchUserCart(userId)); 
+        cart.length==0&&(dispatch(fetchUserCart(userId)));
       });
     }
   }, [dispatch, auth?.currentUser?.uid]);
 
   const handleAddToCart=(product:any)=>{
     if (auth.currentUser?.uid) {          
-      dispatch(addToCart({userId: auth.currentUser.uid, product}));
+       dispatch(addToCart({userId: auth.currentUser.uid, product}));
     } else {
       toast.error("Please log in first to add to the cart.");
             }
@@ -51,8 +42,8 @@ const Carts = () => {
             }
    }
 
-
-const [totalAmount,setTotalAmount]=useState<number>(0)
+  //calculate the total of cart user
+   const [totalAmount,setTotalAmount]=useState<number>(0)
    const calculateTotal = () => {
     const subtotal = cart.reduce( (sum, item) => sum + +(item.price ?? 0) * +item.quantity,  0 );
     const taxes = 2; 
@@ -60,8 +51,7 @@ const [totalAmount,setTotalAmount]=useState<number>(0)
     const total = subtotal + taxes + shipping;    
     setTotalAmount(+total?.toFixed(2)); 
   };
-
-  // Recalculate the total whenever the cart changes
+  // calculate the total whenever the cart changes
   useEffect(() => {
     calculateTotal();
   }, [cart]);

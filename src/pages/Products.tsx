@@ -22,7 +22,7 @@ const ProductList = () => {
     }
   }, [status, dispatch]);
 
- 
+
 
   if (status === "loading") {
     return (
@@ -37,7 +37,6 @@ const ProductList = () => {
     )
   };
   if (status === "failed") return <p>Error: {error}</p>;
-
   const itemsPerPage = 1;
   const offset = currentPage * itemsPerPage;
   const currentItems = products.slice(offset, offset + itemsPerPage);
@@ -46,18 +45,13 @@ const ProductList = () => {
   const handlePageClick = (event: any) => {
     setCurrentPage(event.selected);
   };
-
-       const handleAddToCart=(product:any)=>{
-        if (auth.currentUser?.uid) {          
-          dispatch(addToCart({userId: auth.currentUser.uid, product}));
-          dispatch(addToOrders({userId: auth.currentUser.uid, product}));
-
-        } else {
-          toast.error("Please log in first to add to the cart.");
-                }
-       }
-
-
+  const handleAddToCart = (product: any) => {
+    if (auth.currentUser?.uid) {
+      dispatch(addToCart({ userId: auth.currentUser.uid, product }));
+    } else {
+      toast.error("Please log in first to add to the cart.");
+    }
+  }
   return (
     <div className="products" >
       {/* <Pagination pageCount={pageCount}  onPageChange={handlePageClick} currentPage={currentPage} /> */}
@@ -81,9 +75,9 @@ const ProductList = () => {
                     <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
                       39% OFF
                     </span>
-                    <SingleWishlist  productProps={product}/>
-                    
-                    
+                    <SingleWishlist productProps={product} />
+
+
                   </div>
                   <div className="mt-4 px-5 pb-5" >
                     <a href="#">
@@ -126,8 +120,8 @@ const ProductList = () => {
                       </div>
                     </div>
                     <div
-                    onClick={() => {handleAddToCart(product) }}
-                      
+                      onClick={() => { handleAddToCart(product) }}
+
                       className="flex cursor-pointer items-center gap-3 justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
                     >
                       <ShoppingCartIcon />
@@ -141,7 +135,7 @@ const ProductList = () => {
           ))}
         </div>
       )}
-{/* <Wish2  /> */}
+      {/* <Wish2  /> */}
     </div>
   );
 };

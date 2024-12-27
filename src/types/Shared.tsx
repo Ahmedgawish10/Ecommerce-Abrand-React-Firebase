@@ -1,6 +1,6 @@
 export  interface Product {
   orders: any;
-  totalAmount: any;
+  totalAmount: number;
   createdAt: string | number | Date;
   userId: any;
   id?: string;
@@ -10,3 +10,18 @@ export  interface Product {
   category?:string;
   timeStamp?:string
 }
+
+export interface AddToOrdersPayload {
+  order: Product;  
+  orderUserId: string; 
+}
+export interface Orders {
+  createdAt?:string;
+  orderFlow?:string;
+  orders?: Product[];  
+  status?:string;
+  totalAmount?:number;
+  userId?: string; 
+}
+
+

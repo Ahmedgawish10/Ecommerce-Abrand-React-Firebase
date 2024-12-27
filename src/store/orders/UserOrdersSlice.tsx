@@ -2,44 +2,44 @@ import { Product } from "../../types/Shared";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { doc, getDoc, setDoc, collection, getDocs } from "firebase/firestore";
 import { auth, db } from "../../config/Firebase";
+import { AddToOrdersPayload } from "../../types/Shared";
+import { Orders } from "../../types/Shared";
 
-// Add to Orders Thunk
-export const addToOrders = createAsyncThunk<any, any>(
-  "orders/addToOrders",
-  async ({order,orderId}) => {   
+// add New order
+export const addToOrders = createAsyncThunk<Orders, { order:any; orderUserId: string } >(
+  "orders/addToOrders",async ({order,orderUserId}) => {   
+  console.log("hi1",order);
+  console.log("hi2",orderUserId);
     const orderDoc = doc(db, `users/${auth.currentUser?.uid}/orders/${new Date().getTime()}`);
-    const totalAmount = order.reduce((total: number, item: any) => total + (item.price ?? 0) * (item.quantity ?? 1), 0);
-    
-    await setDoc(orderDoc, {
+    const totalAmount = order.reduce((acuTotal: number, item: any) => acuTotal + (item.price ?? 0) * (item.quantity ?? 1), 0);
+    let OrderUser={
       userId: auth.currentUser?.uid,
       orders: order, 
       createdAt: new Date().toISOString(),
       totalAmount: totalAmount, 
       status:"Processing",
-      orderFlow:orderId
-    });    
-    return { ...order};
+      orderFlow:orderUserId
+            }
+    await setDoc(orderDoc, OrderUser);   
+     return OrderUser;
   }
 );
-// Get All Orders Thunk
-export const getAllOrders = createAsyncThunk<any, any>(
-  "orders/getAllOrders",
-  async ({ userId }:any) => {
+// get All Orders 
+export const getAllOrders = createAsyncThunk<Orders[], {userId:string}>("orders/getAllOrders",
+  async ({ userId }) => {
     const ordersCollection = collection(db, `users/${userId}/orders`);
     const ordersSnapshot = await getDocs(ordersCollection);
 
-    const orders: Product[] = ordersSnapshot.docs.map((doc) => ({
+    const orders: Orders[] = ordersSnapshot.docs.map((doc) => ({
       ...doc.data(),
-    })) as Product[];
+    })) as any[];
 
     return orders;
   }
 );
 
-
-
 interface OrdersState {
-  orders: Product[];
+  orders: Orders[];
   loading: boolean;
   error: string | null;
 }
@@ -60,11 +60,9 @@ const ordersSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addToOrders.fulfilled, (state, action: any) => {
+      .addCase(addToOrders.fulfilled, (state, action: PayloadAction<Orders> ) => {
         state.loading = false;
-        state.orders.push(action.payload);
-        console.log("lk",action.payload);
-        
+        state.orders.push(action.payload);                
       })
       .addCase(addToOrders.rejected, (state, action) => {
         state.loading = false;
@@ -74,11 +72,9 @@ const ordersSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(getAllOrders.fulfilled, (state, action: PayloadAction<Product[]>) => {
+      .addCase(getAllOrders.fulfilled, (state, action: PayloadAction<Orders[]>) => {
         state.loading = false;
-        state.orders = action.payload;
-        console.log( action.payload);
-        
+        state.orders = action.payload;        
       })
       .addCase(getAllOrders.rejected, (state, action) => {
         state.loading = false;

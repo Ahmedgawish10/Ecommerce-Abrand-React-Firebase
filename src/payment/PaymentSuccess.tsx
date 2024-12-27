@@ -1,9 +1,10 @@
 import { useEffect, useState, useTransition } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 import { auth } from "../config/Firebase";
 import { clearCart } from "../store/carts/action/CartsActs";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { addToOrders } from './../store/orders/UserOrdersSlice';
+import { addToOrders } from "../store/orders/UserOrdersSlice";
 
 const SuccessPage = () => {
   const location = useLocation();
@@ -15,29 +16,28 @@ const SuccessPage = () => {
   const dispatch = useAppDispatch();
 
   const [isPending, startTransition] = useTransition();
-  const {cart}=useAppSelector((state)=>state.cart)
-  const {orders}=useAppSelector((state)=>state.order)
+  const { cart } = useAppSelector((state) => state.cart);
 
   useEffect(() => {
-    const trimmedSessionId = sessionId?.replace(/"/g, '').slice(0, -5);
-    
+    const trimmedSessionId = sessionId?.replace(/"/g, "").slice(0, -5);
+
     if (!sessionId) {
       navigate("/", { replace: true });
     }
+
     if (sessionId) {
       const fetchSession = async () => {
         try {
-          // https://testpayment-liart.vercel.app 
-          // http://localhost:5000
-          const response = await fetch(`https://testpayment-liart.vercel.app/session/${trimmedSessionId}`);
-          const data = await response.json();
-
+          const response = await axios.get(`https://testpayment-liart.vercel.app/session/${trimmedSessionId}` );
+          const data = response.data;
           if (data && data.payment_status === "paid") {
-            setPaymentStatus("Payment successful!");            
+            setPaymentStatus("Payment successful!");
             if (auth?.currentUser?.uid) {
-               let orderUser:any=[...cart];
-              if (cart.length > 0) {                
-                dispatch(addToOrders({order:orderUser,orderId:data.payment_intent}));
+              const orderUser = [...cart];
+              if (cart.length > 0) {
+                dispatch(
+                  addToOrders({ order: orderUser, orderUserId: data.payment_intent })
+                );
               }
               dispatch(clearCart(auth?.currentUser?.uid));
             }
@@ -54,15 +54,15 @@ const SuccessPage = () => {
 
       fetchSession();
     }
-  }, [sessionId, auth.currentUser, dispatch,cart]);
+  }, [sessionId, auth.currentUser, dispatch, cart, navigate]);
 
   return (
     <div>
       {loading ? (
         <p className="h-[90vh]">Loading...</p>
       ) : (
-        <div className=" h-screen pt-5">
-          <div className=" p-6 md:mx-auto md:w-[300px] bg-white">
+        <div className="h-screen pt-5">
+          <div className="p-6 md:mx-auto md:w-[300px] bg-white">
             <svg
               viewBox="0 0 24 24"
               className="text-green-600 w-16 h-16 mx-auto my-6"
@@ -84,7 +84,7 @@ const SuccessPage = () => {
                 <button
                   onClick={() =>
                     startTransition(() => {
-                      navigate("/",{replace:true});
+                      navigate("/", { replace: true });
                     })
                   }
                   className="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3"
