@@ -9,6 +9,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import BtnChekout from "../../payment/Payment";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { getProductImage } from "../../utils/productImages";
 
 const Carts = () => {  
   const stripePromise = useMemo(() =>loadStripe("pk_test_51P85jmLPTeuzPbczFv563xXzD8vLfogDI4a5rmuv2tmTIIOvZL3NAcDFgdSwSUHmT0y4HavsoX2Fhb5Njdl1czWK00UvlNxkGf"),[]);
@@ -75,9 +76,9 @@ const Carts = () => {
                       <div key={index} className="flex items-center py-4 border-b">
                         <div className="flex-1 flex flex-col">
                           <img
-                            className="h-16 w-16 mr-4"
-                            src={item.imageUrl}
-                            alt="Product"
+                            className="h-16 w-16 mr-4 object-cover rounded"
+                            src={getProductImage(item, index)}
+                            alt={item.name || "Product"}
                           />
                           <div className="font-semibold">{item.name}</div>
                         </div>

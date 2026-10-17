@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { getAllOrders } from '../../store/orders/UserOrdersSlice'
 import { auth } from '../../config/Firebase'
 import { Link } from 'react-router-dom'
+import { getProductImage } from '../../utils/productImages'
 function UserOrders() {
   const { orders } = useAppSelector((state) => state.order)
   const dispatch = useAppDispatch()
@@ -46,9 +47,9 @@ function UserOrders() {
                     <div key={itemIndex} className="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                       <div className="pb-4 md:pb-8 w-full md:w-40">
                         <img
-                          className="   xmd:w-[200px] md:block"
-                          src={item.imageUrl}
-                          alt="product"
+                          className="   xmd:w-[200px] md:block object-cover rounded"
+                          src={getProductImage(item, itemIndex)}
+                          alt={item.name || "product"}
                         />
 
                       </div>
