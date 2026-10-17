@@ -14,6 +14,7 @@ const Home = React.lazy(() => import('./components/Home'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const SingleCategory = React.lazy(() =>import('./pages/categories/SingleCategory'));
 const Carts = React.lazy(() =>import('./pages/carts/UserCarts'));
+const Wishlist = React.lazy(() => import('./pages/Wish'));
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<div></div>}>
              <ProtectedRoute><UserOrders /></ProtectedRoute>
+          </Suspense>
+        ),
+      },
+      {
+        path: '/wishlist',
+        element: (
+          <Suspense fallback={<div className='h-screen'></div>}>
+             <ProtectedRoute><Wishlist /></ProtectedRoute>
           </Suspense>
         ),
       },

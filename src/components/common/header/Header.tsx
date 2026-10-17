@@ -85,9 +85,11 @@ function Header() {
                                 <div className="cart flex gap-1 mr-2">
                                     <SearchIcon className="cursor-pointer" />
                                     <div className="wishlist-box relative">
-                                    <FavoriteBorderIcon className="cursor-pointer" />
-                                    <span className={`wish-count flex justify-center items-center absolute top-[-18px] right-[-6px] rounded-full 
-                                     w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{wishlist.length}</span>
+                                        <Link to="/wishlist">
+                                            <FavoriteBorderIcon className="cursor-pointer" />
+                                            <span className={`wish-count flex justify-center items-center absolute top-[-18px] right-[-6px] rounded-full 
+                                             w-5 h-5 ${isDarkMode?"bg-[#fd9424] p-2 text-[#0f172a]":"bg-[#0f172a] p-2 text-[#E74040]"}`}>{wishlist.length}</span>
+                                        </Link>
                                     </div>
                                     <div className="cart-box relative">
                                         <Link to={'/cart#cart'}>
@@ -113,6 +115,9 @@ function Header() {
                                         </li>
                                         <li>
                                             <Link to="/orders" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Orders</Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/wishlist" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Wishlist</Link>
                                         </li>
                                     </ul>
                                     <div className="py-1">
