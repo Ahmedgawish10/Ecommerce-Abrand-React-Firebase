@@ -1,10 +1,10 @@
 import { useTheme } from "@mui/material";
 import { initFlowbite } from "flowbite";
 import React, { useEffect } from "react";
-import Hand from "../../../assets/hand.png"
-import Watch from "../../../assets/watch.png"
-import Shoes from "../../../assets/shoes.png"
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import Hand from "../../../assets/hand.png";
+import Watch from "../../../assets/watch.png";
+import Shoes from "../../../assets/shoes.png";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 export default function Test() {
   useEffect(() => {
     initFlowbite();
@@ -22,7 +22,7 @@ export default function Test() {
         "Stay connected and stylish with the Apple Watch. Featuring seamless connectivity, advanced health tracking, and a sleek design, it’s the perfect blend of innovation and functionality.",
       buttonText: "Explore Now",
       imgSrc: Watch,
-      alt:"t"
+      alt: "t",
     },
     {
       id: 2,
@@ -32,7 +32,7 @@ export default function Test() {
         "Immerse yourself in the beauty of the Quran wherever you are. With advanced audio features and a sleek design, this device lets you hear the Quran effortlessly.",
       buttonText: "Explore Now",
       imgSrc: Hand,
-      alt:"Hand"
+      alt: "Hand",
     },
     {
       id: 3,
@@ -42,10 +42,8 @@ export default function Test() {
         "Stay ahead in style with Nike shoes. Combining cutting-edge design, exceptional comfort, and unmatched performance.",
       buttonText: "Explore Now",
       imgSrc: Shoes,
-      alt:"Shoes"
+      alt: "Shoes",
     },
- 
- 
   ];
 
   return (
@@ -56,7 +54,10 @@ export default function Test() {
           className="relative rounded-lg overflow-hidden "
           data-carousel="static"
         >
-          <div className="container-carousel relative h-[92vh] sm:h-[650px] lg:h-[500px] " data-carousel-inner>
+          <div
+            className="container-carousel relative h-[92vh] sm:h-[650px] lg:h-[500px] "
+            data-carousel-inner
+          >
             {carouselItems.map((item) => (
               <div
                 key={item.id}
@@ -91,7 +92,12 @@ export default function Test() {
                         <div className=" flex-1 w-[100%] md:none lg:w-3/5 relative flex justify-center md:justify-end items-center">
                           <img
                             src={item.imgSrc}
-                            className={` ${item.alt=="Hand"  ?"":"000 w-[60%] sm:w-[60%] md:w-[80%] lg:max-w-sm"} h-[280px] md:h-auto  `}
+                            alt={item.alt}
+                            className={`${
+                              item.alt === "Hand"
+                                ? ""
+                                : "w-[60%] sm:w-[60%] md:w-[80%] lg:max-w-sm"
+                            } h-[280px] md:h-auto object-contain`}
                           />
                         </div>
                       </div>
@@ -114,14 +120,14 @@ export default function Test() {
             className="flex absolute top-[300px] left-0 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
             data-carousel-prev
           >
-           <NavigateNextIcon className="trnasform rotate-180"/>
+            <NavigateNextIcon className="trnasform rotate-180" />
           </button>
           <button
             type="button"
             className="flex absolute top-[300px] right-3 z-40 items-center justify-center w-10 h-10 bg-gray-200/50 rounded-full hover:bg-gray-300 focus:outline-none transition"
             data-carousel-next
           >
-            <NavigateNextIcon/>
+            <NavigateNextIcon />
           </button>
         </div>
       </div>
